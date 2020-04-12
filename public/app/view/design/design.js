@@ -12,6 +12,7 @@ Ext.define('TimeTableApp.view.design.design',{
     viewModel: {
         type: 'design-design'
     },
+    listeners: { afterrender: 'onAfterDesignLoad' },
     items: [
         {
             extend: 'Ext.tab.Panel',
@@ -49,15 +50,10 @@ Ext.define('TimeTableApp.view.design.design',{
                                     {
                                         xtype: 'combobox',
                                         fieldLabel: 'Course Unit',
-                                        displayField: 'name',
-                                        valuefield: 'id',
+                                        displayField: 'courseName',
+                                        valuefield: 'courseId',
+                                        reference: 'grdallCourses',
                                         forceSelection: true,
-                                        store: {
-                                            data: [
-                                                { id: 'CHEMISTRY LAB', name: 'Science' },
-                                                { id: 'Physics Lab', name: 'Engineering' }
-                                            ]
-                                        },
                                         allowBlank: false
                 
                                     },
@@ -65,15 +61,9 @@ Ext.define('TimeTableApp.view.design.design',{
                                         xtype: 'combobox',
                                         fieldLabel: 'Lecturer',
                                         displayField: 'name',
-                                        valuefield: 'id',
+                                        valuefield: 'staffId',
+                                        reference: 'grdallStaff',
                                         forceSelection: true,
-                                        store: {
-                                            data: [
-                                                { id: 'CHEMISTRY LAB', name: 'Science' },
-                                                { id: 'Physics Lab', name: 'Engineering' },
-                                                { id: 'Chemistry', name: 'Chemistry' }
-                                            ]
-                                        },
                                         allowBlank: false
                 
                                     },
@@ -116,8 +106,8 @@ Ext.define('TimeTableApp.view.design.design',{
                     ],
                 },
                 {
-                    title: 'Program Student Allocation',
-                    xtype:'durationView',
+                    title: 'Class',
+                    xtype: 'lectureClass',
                 }, {
                     title: 'Course',
                     xtype:'courseView',

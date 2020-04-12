@@ -67,6 +67,16 @@ Ext.define('TimeTableApp.view.course.course', {
 
                     },
                     {
+                        xtype: 'radiogroup',
+                        fieldLabel: 'is Electable',
+                        columns: 2,
+                        vertical: true,
+                        items: [
+                            { boxLabel: 'YES', name: 'isElectable', inputValue: 'YES' },
+                            { boxLabel: 'NO', name: 'isElectable', inputValue: 'NO'},
+                        ]
+                    }, 
+                    {
                         xtype: 'combobox',
                         fieldLabel: 'Semester Of Study',
                         bind: '{studySemester}',

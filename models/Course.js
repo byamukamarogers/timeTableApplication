@@ -41,7 +41,10 @@ module.exports = function (sequelize, DataTypes) {
         programId: {
             type: DataTypes.INTEGER,
             field: 'programid'
-
+        },
+        staffId: {
+            type: DataTypes.INTEGER,
+            field: 'staffid'
         }
     }, {
         tableName: 'Courses',

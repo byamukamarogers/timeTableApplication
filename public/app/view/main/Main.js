@@ -9,7 +9,8 @@ Ext.define('TimeTableApp.view.main.Main', {
         'TimeTableApp.view.main.MainController',
         'TimeTableApp.view.main.MainModel',
         'TimeTableApp.view.main.List',
-        'TimeTableApp.view.tests.Test'
+        'TimeTableApp.view.tests.Test',
+        'TimeTableApp.view.class.newClass'
     ],
 
     controller: 'main',
