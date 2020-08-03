@@ -5,46 +5,65 @@ module.exports = function (sequelize, DataTypes) {
             field: 'courseid',
             primaryKey: true,
             allowNull: false,
-            autoIncrement: true
-
+            autoIncrement: true,
         },
         courseName: {
             type: DataTypes.STRING(50),
             field: 'coursename',
-
+            allowNull: false,
         },
         courseCode: {
             type: DataTypes.STRING(50),
-            field: 'coursecode'
-
+            field: 'coursecode',
+            allowNull: false,
+            unique: true,
         },
         creditUnits: {
             type: DataTypes.INTEGER,
-            field: 'creditunits'
-
+            field: 'creditunits',
+            allowNull: true,
         },
         studyYear: {
             type: DataTypes.INTEGER,
-            field: 'studyyear'
-
+            field: 'studyyear',
+            allowNull: false,
         },
         studySemester: {
             type: DataTypes.INTEGER,
-            field: 'studysemester'
-
+            field: 'studysemester',
+            allowNull: false,
         },
         courseTypeId: {
             type: DataTypes.INTEGER,
-            field: 'coursetypeid'
+            field: 'coursetypeid',
+            allowNull: false,
 
         },
         programId: {
             type: DataTypes.INTEGER,
-            field: 'programid'
+            field: 'programid',
+            allowNull: false,
+        },
+        //course settings
+        numberOfLecturesPerWeek: {
+            type: DataTypes.INTEGER,
+            field: 'numberoflecturesperweek',
+            allowNull: true,
+        },
+        durationPerLecture: {
+            type: DataTypes.DECIMAL(3,2),
+            field: 'durationperlecture',
+            allowNull: true,
+        },
+        maxNumberOfLecturesPerDay: {
+            type: DataTypes.INTEGER,
+            field: 'maximumnumberoflecturesperday',
+            allowNull: true,
         },
         staffId: {
             type: DataTypes.INTEGER,
-            field: 'staffid'
+            field: 'staffid',
+            allowNull: true,
         }
     }, {
         tableName: 'Courses',

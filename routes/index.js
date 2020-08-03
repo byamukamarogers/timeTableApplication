@@ -9,9 +9,120 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/* TimeTable Endpoint */
+router.get('/loadTimeTable', async function (req, res, next) {
+  let timetable = await models.TimeTable.findAll({ include: [models.Course, models.Ssession, models.Staff, models.Day, models.Room] });
+  res.send(timetable);
+});
+
+/* TimeTable Endpoint */
+
+
+router.get('/loadAssociation', async function (req, res, next) {
+  let association = await models.Allocation.findAll();
+  res.send(association);
+});
+router.post('/addAssociation', async function (req, res, next) {
+  let rawdata = req.body;
+  console.log(rawdata);
+  let data = {};
+  try {
+    let result;
+    for (key in rawdata) {
+      if (rawdata[key] !== '') {
+        data[key] = rawdata[key];
+      }
+    }
+    if (rawdata.classId) {
+      result = await models.Allocation.create(data);
+    }
+
+    res.send({ status: 'OK', data: result });
+  } catch (err) {
+    res.status(400).send("Sorry. Something happened on the server. Contact System Admin. ");
+    console.log(err);
+  }
+});
+router.get('/loadLectureClasses', async function (req, res, next) {
+  let lectureclass = await models.LectureClass.findAll();
+  res.send(lectureclass);
+});
+router.post('/addLectureClass', async function (req, res, next) {
+  let rawdata = req.body;
+  console.log(rawdata);
+  let data = {};
+  try {
+    let result;
+    for (key in rawdata) {
+      if (rawdata[key] !== '') {
+        data[key] = rawdata[key];
+      }
+    }
+    if (rawdata.classId) {
+      result = await models.LectureClass.create(data);
+    }
+
+    res.send({ status: 'OK', data: result });
+  } catch (err) {
+    res.status(400).send("Sorry. Something happened on the server. Contact System Admin. ");
+    console.log(err);
+  }
+});
 router.get('/rooms', async function (req, res, next) {
   let duration = await models.Room.findAll({ include: [models.Faculty] });
   res.send(duration);
+});
+router.post('/addDay', async function (req, res, next) {
+  let rawdata = req.body;
+  console.log(rawdata);
+  let data = {};
+  try {
+    let result;
+    for (key in rawdata) {
+      if (rawdata[key] !== '') {
+        data[key] = rawdata[key];
+      }
+    }
+    if (rawdata.dayId) {
+      result = await models.Day.create(data);
+    }
+
+    res.send({ status: 'OK', data: result });
+  } catch (err) {
+    res.status(400).send("Sorry. Something happened on the server. Contact System Admin. ");
+    console.log(err);
+  }
+});
+router.get('/allWeekDays', async function (req, res, next) {
+  let day = await models.Day.findAll();
+  res.send(day);
+});
+
+router.post('/addSsession', async function (req, res, next) {
+  let rawdata = req.body;
+  let data = {};
+  console.log(rawdata);
+  try {
+    let result;
+    for (key in rawdata) {
+      if (rawdata[key] !== '') {
+        data[key] = rawdata[key];
+      }
+    }
+    if (rawdata.ssessionId) {
+      result = await models.Ssession.update(data,{where: {ssessionId: rawdata.ssessionId}});
+    } else {
+      result = await models.Ssession.create(data);
+    }
+    res.send({ status: 'OK', data: result });
+  } catch (err) {
+    res.status(400).send("Sorry. Something happened on the server. Contact System Admin. ");
+    console.log(err);
+  }
+});
+router.get('/allSsession', async function (req, res, next) {
+  let sess = await models.Ssession.findAll();
+  res.send(sess);
 });
 router.post('/addRoom', async function (req, res, next) {
   let rawdata = req.body;
@@ -26,7 +137,7 @@ router.post('/addRoom', async function (req, res, next) {
     }
     if (rawdata.roomId) {
       result = await models.Room.create(data);
-    } else if(rawdata.roomName) {
+    } else if (rawdata.roomName) {
       let duration = '';
       console.log(rawdata.roomName);
       try {
@@ -40,10 +151,10 @@ router.post('/addRoom', async function (req, res, next) {
         res.status(400).send("Sorry. Something happened on the server. Contact System Admin. ");
         console.log(err);
       }
-    } else{
+    } else {
 
     }
-    
+
     res.send({ status: 'OK', data: result });
   } catch (err) {
     res.status(400).send("Sorry. Something happened on the server. Contact System Admin. ");
@@ -77,34 +188,10 @@ router.post('/addRoomType', async function (req, res, next) {
   }
 });
 
-
-router.get('/durations', async function (req, res, next) {
-  let duration = await models.Duration.findAll();
-  res.send(duration);
+router.get('/loadCourseTypes', async function (req, res, next) {
+  let courseType = await models.CourseType.findAll();
+  res.send(courseType);
 });
-router.post('/addDuration', async function (req, res, next) {
-  let rawdata = req.body;
-  let data = {};
-  console.log(rawdata);
-  try {
-    let result;
-    for (key in rawdata) {
-      if (rawdata[key] !== '') {
-        data[key] = rawdata[key];
-      }
-    }
-    if (rawdata.durationId) {
-      result = await models.Duration.create(data);
-    } else {
-      console.log("An error occured");
-    }
-    res.send({ status: 'OK', data: result });
-  } catch (err) {
-    res.status(400).send("Sorry. Something happened on the server. Contact System Admin. ");
-    console.log(err);
-  }
-});
-
 router.get('/courseunits', async function (req, res, next) {
   let course = await models.Course.findAll({ include: [models.Program] });
   res.send(course);
@@ -132,10 +219,18 @@ router.post('/addCourseUnit', async function (req, res, next) {
   }
 });
 
+router.get('/programs/:programSearch', async function (req, res, next) {
+  let searchItem = req.params.programSearch;
+  let program = await models.Program.findAll({ where: { programName: { [Op.like]: `%${searchItem}%` } }, include: [models.Department] });
+  res.send(program);
+});
+
 router.get('/programs', async function (req, res, next) {
+
   let program = await models.Program.findAll({ include: [models.Department] });
   res.send(program);
 });
+
 router.post('/addProgram', async function (req, res, next) {
   let rawdata = req.body;
   let data = {};

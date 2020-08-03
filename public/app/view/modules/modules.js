@@ -24,18 +24,18 @@ Ext.define('TimeTableApp.view.modules.modules', {
             items: [
                 {
                     title: 'Room',
-                    xtype:'roomView',
+                    xtype: 'roomViewlist',
                 },
                 {
                     title: 'Duration',
-                    xtype:'durationView',
+                    xtype: 'durationView',
                 }, {
                     title: 'Course',
-                    xtype:'courseView',
+                    xtype: 'courseView',
                 },
                 {
                     title: 'Program',
-                    xtype:'programView',
+                    xtype: 'programView',
                 },
                 {
                     title: 'Student',
@@ -155,14 +155,14 @@ Ext.define('TimeTableApp.view.modules.modules', {
                 },
                 {
                     title: 'Department',
-                    xtype:'departmentView',
+                    xtype: 'departmentView',
                 },
                 {
                     title: 'Faculty',
-                    xtype:'facultyView',
-                },{
+                    xtype: 'facultyView',
+                }, {
                     title: 'Institution',
-                    xtype:'institutionView',
+                    xtype: 'institutionView',
                 }
 
             ]

@@ -1,3 +1,13 @@
+/* C:/Users/PC/Desktop/FP/TIMETABLE/public/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2966 */
+.x-tab-over .x-tab-default-top-ml,
+.x-tab-over .x-tab-default-top-mr {
+    background-image: url(images/tab/tab-default-top-over-sides.gif);
+}
+/* C:/Users/PC/Desktop/FP/TIMETABLE/public/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2971 */
+.x-tab-over .x-tab-default-top-mc {
+    background-repeat: repeat-x;
+    background-image: url(images/tab/tab-default-top-over-fbg.gif);
+}
 /* C:/Users/PC/Desktop/FP/TIMETABLE/public/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2957 */
 .x-tab-focus .x-tab-default-top-tl,
 .x-tab-focus .x-tab-default-top-bl,

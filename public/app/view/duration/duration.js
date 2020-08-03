@@ -12,85 +12,17 @@ Ext.define('TimeTableApp.view.duration.duration', {
     viewModel: {
         type: 'duration-duration'
     },
-    listeners: { afterrender: 'onAfterDurationLoad' },
+    listeners: { afterrender: 'onAfterRender' },
     items: [
         {
             xtype: 'container',
             layout: 'hbox',
-            margin: '3 0 0 0',
+            margin: 3,
             items: [
-                //Duration form        
-                {
-                    title: 'Create New Duration',
-                    bodyPadding: 5,
-                    width: '35%',
-                    layout: 'anchor',
-                    defaults: {
-                        anchor: '100%'
-                    },
-                    defaultType: 'textfield',
-                    items: [{
-                        fieldLabel: 'Duration ID',
-                        bind: '{durationId}',
-                        allowBlank: false
-                    }, {
-                        fieldLabel: 'Length',
-                        xtype: 'numberfield',
-                        bind: '{durationLength}',
-                        allowBlank: false
-                    }, {
-                        fieldLabel: 'Start Time',
-                        xtype: 'timefield',
-                        bind: '{startTime}',
-                        allowBlank: false,
-                        minValue: '6:00 AM',
-                        maxValue: '10:00 PM',
-                        increment: 30,
-                        anchor: '100%'
-                    },
-                    {
-                        xtype: 'combobox',
-                        fieldLabel: 'End Time',
-                        bind: '{endTime}',
-                        displayField: 'name',
-                        valueField: 'id',
-                        forceSelection: true,
-                        store: {
-                            data: [
-                                { id: '07:00', name: '07:00 AM' },
-                                { id: '08:00', name: '08:00 AM' },
-                                { id: '09:00', name: '09:00 AM' },
-                                { id: '10:00', name: '10:00 AM' },
-                                { id: '11:00', name: '11:00 AM' },
-                                { id: '12:00', name: '12:00 AM' },
-                                { id: '13:00', name: '01:00 PM' },
-                                { id: '14:00', name: '02:00 PM' },
-                                { id: '15:00', name: '03:00 PM' },
-                                { id: '16:00', name: '04:00 PM' },
-                                { id: '17:00', name: '05:00 PM' },
-                                { id: '18:00', name: '06:00 PM' },
-                                { id: '19:00', name: '07:00 PM' },
-                                { id: '20:00', name: '08:00 PM' },
-                                { id: '21:00', name: '09:00 PM' },
-                                { id: '22:00', name: '10:00 PM' },
-                            ]
-                        },
-                        allowBlank: false
-
-                    },
-                    ],
-                    buttons: [{
-                        text: 'Reset'
-                    }, {
-                        text: 'Submit',
-                        handler: 'onDurationSubmitClicked'
-                    }],
-                },
                 //Grid to display all durations
                 {
-                    margin: '0 0 0 10',
                     bodyPadding: 0,
-                    width: '65%',
+                    width: '100%',
                     layout: 'anchor',
                     defaults: {
                         anchor: '100%'
@@ -99,8 +31,8 @@ Ext.define('TimeTableApp.view.duration.duration', {
                     items: [{
                         extend: 'Ext.grid.Panel',
                         xtype: 'grid',
-                        title: 'All Durations',
-                        reference: 'grdallDurations',
+                        title: 'All Time Table Sessions',
+                        reference: 'grdallSessions',
                         actions: {
                             delete: {
                                 iconCls: 'x-fa fa-trash-o red',
@@ -119,9 +51,10 @@ Ext.define('TimeTableApp.view.duration.duration', {
                             }]
                         }],
                         columns: [
+                            { text: 'Session Id', dataIndex: 'ssessionId', flex: 1 },
                             { text: 'Length (Hours)', dataIndex: 'durationLength', flex: 1 },
-                            { text: 'Start Time', dataIndex: 'startTime', flex: 1 },
-                            { text: 'End Time', dataIndex: 'endTime' },
+                            { text: 'Start Time', dataIndex: 'from', flex: 1 },
+                            { text: 'End Time', dataIndex: 'to',flex: 1  },
                             {
                                 width: 70,
                                 sortable: false,

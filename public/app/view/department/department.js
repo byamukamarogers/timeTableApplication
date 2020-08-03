@@ -11,60 +11,17 @@ Ext.define('TimeTableApp.view.department.department', {
     viewModel: {
         type: 'department-department'
     },
-    listeners: { afterrender: 'onAfterDepartmentLoad' },
+    listeners: { afterrender: 'onAfterRender' },
     items: [
         {
             xtype: 'container',
             layout: 'hbox',
-            margin: '3 0 0 0',
+            margin: 3,
             items: [
+                           //Grid to display all Programs
                 {
-                    title: 'Add New Department',
-                    bodyPadding: 5,
-                    width: '30%',
-                    layout: 'anchor',
-                    defaults: {
-                        anchor: '100%'
-                    },
-                    defaultType: 'textfield',
-                    items: [{
-                        fieldLabel: 'Department Id',
-                        bind: '{departmentId}',
-                        allowBlank: false
-                    }, {
-                        fieldLabel: 'Department Name',
-                        bind: '{departmentName}',
-                        allowBlank: false
-                    },
-                    {
-                        fieldLabel: 'Department Code',
-                        bind: '{departmentCode}',
-                        allowBlank: false
-                    },
-                    {
-                        xtype: 'combobox',
-                        reference: 'cboFacultyName',
-                        bind: '{facultyId}',
-                        fieldLabel: 'Faculty Name',
-                        displayField: 'facultyName',
-                        valueField: 'facultyId',
-                        forceSelection: true,
-                        queryMode: 'local'
-                    }
-
-                    ],
-                    buttons: [{
-                        text: 'Reset'
-                    }, {
-                        text: 'Submit',
-                        handler: 'onDepartmentSubmitClicked'
-                    }],
-                },
-                //Grid to display all Programs
-                {
-                    margin: '0 0 0 10',
                     bodyPadding: 0,
-                    width: '70%',
+                    width: '100%',
                     layout: 'anchor',
                     defaults: {
                         anchor: '100%'

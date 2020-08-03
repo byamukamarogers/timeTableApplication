@@ -1,4 +1,4 @@
-Ext.define('TimeTableApp.view.staff.staff',{
+Ext.define('TimeTableApp.view.staff.staff', {
     extend: 'Ext.panel.Panel',
     xtype: 'staffView',
 
@@ -10,98 +10,18 @@ Ext.define('TimeTableApp.view.staff.staff',{
     controller: 'staff-staff',
     viewModel: {
         type: 'staff-staff'
-    },    
-    listeners:{afterrender:'onStaffLoad'},
+    },
+    listeners: { afterrender: 'onAfterRender' },
     items: [
         {
             xtype: 'container',
             layout: 'hbox',
-            margin: '3 0 0 0',
-            items: [     
-                {
-                    title: 'Add New Staff Member',
-                    bodyPadding: 5,
-                    width: '30%',
-                    layout: 'anchor',
-                    defaults: {
-                        anchor: '100%'
-                    },
-                    defaultType: 'textfield',
-                    items: [{
-                        fieldLabel: 'Staff Id',
-                        bind: '{staffId}',
-                        allowBlank: false
-                    }, 
-                    {
-                        fieldLabel: 'Name',
-                        bind: '{name}',
-                        allowBlank: false
-                    }, 
-                    {
-                        fieldLabel: 'Initials',
-                        bind: '{initial}',
-                        allowBlank: false
-                    }, 
-                    {
-                        xtype: 'combobox',
-                        fieldLabel: 'Gender',
-                        bind:'{gender}',
-                        displayField: 'name',
-                        valuefield: 'id',
-                        forceSelection: true,
-                        store: {
-                            data: [
-                                { id: 'M', name: 'Male' },
-                                { id: 'F', name: 'Female' }
-                            ]
-                        },
-                        allowBlank: false
-
-                    },
-                    {
-                        fieldLabel: 'Address',
-                        bind: '{address}',
-                        allowBlank: false
-                    },
-                    {
-                        fieldLabel: 'Email',
-                        bind: '{email}',
-                        allowBlank: false
-                    },
-                    {
-                        fieldLabel: 'Mobile',
-                        bind: '{phone1}',
-                        allowBlank: false
-                    },
-                    {
-                        fieldLabel: 'Telephone',
-                        bind: '{phone2}',
-                        allowBlank: false
-                    },
-                    {
-                        xtype: 'combobox',
-                        reference: 'cboDepartmentName',
-                        bind: '{departmentId}',
-                        fieldLabel: 'Department Name',
-                        displayField: 'departmentName',
-                        valueField: 'departmentId',
-                        forceSelection: true,
-                        queryMode: 'local'
-                    }
-
-                    ],
-                    buttons: [{
-                        text: 'Reset'
-                    }, {
-                        text: 'Submit',
-                        handler: 'onStaffSubmitClicked'
-                    }],
-                },
+            margin: 3,
+            items: [
                 //Grid to display all Lecturers
                 {
-                    margin: '0 0 0 5',
                     bodyPadding: 0,
-                    width: '70%',
+                    width: '100%',
                     layout: 'anchor',
                     defaults: {
                         anchor: '100%'
@@ -121,22 +41,22 @@ Ext.define('TimeTableApp.view.staff.staff',{
                                 tooltip: 'Edit'
                             }
                         },
-                        items:[{
-                            docked:'top',
-                            xtype:'toolbar',
-                            items:[{
+                        items: [{
+                            docked: 'top',
+                            xtype: 'toolbar',
+                            items: [{
                                 text: 'Search Box',
                             }]
                         }],
                         columns: [
-                            { text: 'Staff Id', dataIndex: 'staffId'},
+                            { text: 'Staff Id', dataIndex: 'staffId' },
                             { text: 'Name', dataIndex: 'name', flex: 1 },
                             { text: 'Gender', dataIndex: 'gender' },
                             { text: 'Address', dataIndex: 'address' },
                             { text: 'Email', dataIndex: 'email' },
                             { text: 'Mobile', dataIndex: 'mobilePhone' },
                             { text: 'Telephone', dataIndex: 'telePhone' },
-                            { text: 'Department', dataIndex: 'departmentName',flex: 1 },
+                            { text: 'Department', dataIndex: 'departmentName', flex: 1 },
                             {
                                 width: 70,
                                 sortable: false,

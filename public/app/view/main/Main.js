@@ -5,14 +5,20 @@ Ext.define('TimeTableApp.view.main.Main', {
     requires: [
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
-
         'TimeTableApp.view.main.MainController',
         'TimeTableApp.view.main.MainModel',
         'TimeTableApp.view.main.List',
         'TimeTableApp.view.tests.Test',
-        'TimeTableApp.view.class.newClass'
-    ],
+        'TimeTableApp.view.class.newClass',
+        'TimeTableApp.view.staticData.Actors',
+        'TimeTableApp.view.util.base.Grid',
+        'TimeTableApp.view.room.roomList',
+        'TimeTableApp.view.settings.Settings',
+        'TimeTableApp.view.*',
 
+        //new ordering
+        'TimeTableApp.view.modules.Menu',
+    ],
     controller: 'main',
     viewModel: 'main',
 
@@ -47,7 +53,7 @@ Ext.define('TimeTableApp.view.main.Main', {
             headerPosition: 'top'
         },
         wide: {
-            headerPosition: 'left'
+            headerPosition: 'top'
         }
     },
 
@@ -67,16 +73,61 @@ Ext.define('TimeTableApp.view.main.Main', {
             }
         }
     },
-    items: [
+        
+    items: [         
         {
-            title: 'Design View',
-            iconCls: 'x-fa fa-home',
-            xtype:'designView',
-        },
+            title: 'Test ABC',
+            iconCls: 'x-fa fa-users',
+            //xtype: 'testGrid',
+            xtype: 'timeTable',
+        }, 
+        {
+            title: 'Testing',
+            iconCls: 'x-fa fa-users',
+            //xtype: 'testGrid',
+            xtype: 'testsView',
+        }, 
         {
             title: 'Structure',
             iconCls: 'x-fa fa-user',
             xtype: 'ttStructure'
+        },   
+        {
+            title: 'Modules',
+            iconCls: 'x-fa fa-home',
+            margin: '2 1 1 1',
+
+            layout: {
+                type: 'border'
+            },
+
+            id: 'modulesCentralPanel',
+            items: [
+                 {
+                    region: 'center',
+                    title:'Time Table Modules',
+
+                },
+                {
+                    xtype: 'modulesmainmenu',
+                    region: 'west',
+                    plugins: 'responsive',
+                    responsiveConfig: {
+                        'width < 768 && tall': {
+                            visible: false
+                        },
+                        'width >= 768': {
+                            visible: true
+                        }
+                    }
+                } 
+            ],
+
+        },
+        {
+            title: 'Design View',
+            iconCls: 'x-fa fa-home',
+            xtype:'designView',
         },
         {
             title: 'Modules',
@@ -89,14 +140,9 @@ Ext.define('TimeTableApp.view.main.Main', {
             xtype:'roomView',
         },
         {
-            title: 'Testing',
+            title: 'Settings',
             iconCls: 'x-fa fa-users',
-            xtype: 'testGrid',
+            xtype: 'settings',
         },
-        {
-            title: 'Testing',
-            iconCls: 'x-fa fa-users',
-            //xtype: 'recipient-panel',
-        }
-    ]
+    ] 
 });

@@ -207,12 +207,16 @@
             "path": "app.js",
             "bundle": true
         },
+        /* {
+            "path": "resources/TableUtil/tableDrag.js",
+            "bundle": true
+        }, */
         {
-            "path": "resources/Utils/jquery.min.js",
+            "path": "resources/TableUtil/jquery-3.4.1.min.js",
             "bundle": true
         },
         {
-            "path": "resources/Utils/jquery.dataTables.js",
+            "path": "resources/TableUtil/tableDragScript.js",
             "bundle": true
         }
     ],
@@ -224,7 +228,7 @@
         "js": [
             // Remove this entry to individually load sources from the framework.
             {
-                "path": "${framework.dir}/build/ext-all-rtl-debug.js"
+                "path": "${framework.dir}/build/ext-all-debug.js"
             }
         ]
     },
@@ -274,6 +278,11 @@
             "path": "${build.out.css.path}",
             "bundle": true,
             "exclude": ["fashion"]
+        },
+        {
+            // custom drag table css
+            "path": "resources/TableUtil/style.css",
+            "bundle": true
         }
     ],
 

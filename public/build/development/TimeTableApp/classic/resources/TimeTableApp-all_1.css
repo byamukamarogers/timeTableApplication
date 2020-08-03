@@ -1,3 +1,28 @@
+/* C:/Users/PC/Desktop/FP/TIMETABLE/public/classic/sass/etc/all.scss:1 */
+.x-mask.splashscreen {
+    background-color: white;
+    opacity: 1;
+}
+/* C:/Users/PC/Desktop/FP/TIMETABLE/public/classic/sass/etc/all.scss:5 */
+.x-mask-msg.splashscreen,
+.x-mask-msg.splashscreen div {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 30px 5px 5px 5px;
+    border: none;
+    background-color: transparent;
+    background-position: top center;
+}
+/* C:/Users/PC/Desktop/FP/TIMETABLE/public/classic/sass/etc/all.scss:16 */
+.x-message-box .x-window-body .x-box-inner {
+    min-height: 110px !important;
+}
+/* C:/Users/PC/Desktop/FP/TIMETABLE/public/classic/sass/etc/all.scss:19 */
+.x-splash-icon {
+    background-image: url('images/app/royclub.png') !important;
+    margin-top: -30px;
+    height: 70px;
+}
 /* C:/Users/PC/Desktop/FP/TIMETABLE/public/ext/packages/core/sass/src/util/SizeMonitor.scss:5 */
 .x-size-monitored {
     /**
@@ -15994,14 +16019,4 @@ div.x-border-layout-ct {
 .x-tab-over .x-tab-default-top-tc,
 .x-tab-over .x-tab-default-top-bc {
     background-image: url(images/tab/tab-default-top-over-corners.gif);
-}
-/* C:/Users/PC/Desktop/FP/TIMETABLE/public/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2966 */
-.x-tab-over .x-tab-default-top-ml,
-.x-tab-over .x-tab-default-top-mr {
-    background-image: url(images/tab/tab-default-top-over-sides.gif);
-}
-/* C:/Users/PC/Desktop/FP/TIMETABLE/public/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2971 */
-.x-tab-over .x-tab-default-top-mc {
-    background-repeat: repeat-x;
-    background-image: url(images/tab/tab-default-top-over-fbg.gif);
 }

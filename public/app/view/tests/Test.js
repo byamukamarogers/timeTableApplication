@@ -7,143 +7,259 @@ Ext.define('TimeTableApp.view.tests.Test', {
         'TimeTableApp.view.tests.TestController',
         'TimeTableApp.view.tests.TestModel',
         'TimeTableApp.view.tests.Test',
-        'Ext.grid.*',
-        'Ext.data.*',
-        'Ext.util.*',
-        'Ext.tip.QuickTipManager',
-        'Ext.ux.LiveSearchGridPanel',
-        'Ext.data.ArrayStore'
     ],
 
     controller: 'tests-test',
     viewModel: {
         type: 'tests-test'
     },
-    listeners: { afterrender: 'onViewLoad' },
-    items: [{
-        extend: 'Ext.ux.LiveSearchGridPanel',
-        xtype: 'grid',
-        columnLines: true,
-        height: 350,
-        width: Ext.themeName === 'neptune-touch' || Ext.themeName === 'crisp' ? 700 : 670,
-        title: 'Live Search Grid',
-        //renderTo: 'testsView',
-    plugins: 'gridfilters',
-        viewConfig: {
-            stripeRows: true
-        },
-        onReady: function (params) {
-            Ext.QuickTips.init();
-        },
-        columns: [
-            {
-                text: 'Company',
-                flex: 1,
-                sortable: false,
-                dataIndex: 'company',
-                /* filter: {
-                    // required configs
-                    type: 'string',
-                    // optional configs
-                    value: '',  // setting a value makes the filter active.
-                    itemDefaults: {
-                        // any Ext.form.field.Text configs accepted
-                    }
-                } */
-            },
-            {
-                text: 'Price',
-                width: 75,
-                sortable: true,
-                formatter: 'usMoney',
-                dataIndex: 'price'
-            },
-            {
-                text: 'Change',
-                width: 86,
-                sortable: true,
-                dataIndex: 'change',
-                //renderer: change
-            },
-            {
-                text: '% Change',
-                width: 110,
-                sortable: true,
-                dataIndex: 'pctChange',
-                //renderer: pctChange,
-                //type: 'float'
+    controller: 'main-menu',
+    collapsible: true,
+    hideCollapseTool: false,
+    split: true,
+    iconCls: 'x-fa fa-sitemap fa-lg',
+    title: 'Modules Menu',
+    width: 250,
+    scrollable: true,
 
+    items: [
+        {
+            extend: 'Ext.panel.Panel',
+            layout: {
+                // layout-specific configs 
+                type: 'accordion',
+                titleCollapse: false,
+                animate: false,
+                activeOnTop: false,
             },
-            {
-                text: 'Last Updated',
-                width: 126,
-                sortable: true,
-                formatter: 'date',
-                dataIndex: 'lastChange'
-            }
-        ],
-        tbar: [
-            {
-                xtype: 'textfield',
-                emptyText: 'Search...',
-                width: 200,
-                enableKeyEvents: true,
-                listeners: {
-                    keyup: {
-                        fn: function (field, e) {
-                            var val = field.getValue();
-                            data.getStore().filterBy(function (record) {
-                                return record.get('Client').substring(0, val.length) ===
-                                    val;
-                            }, this);
-                        },
-                        buffer: 250
-                    }
+            items: [
+                {
+                    title: 'Class',
+                },
+                {
+                    title: 'Room',
+                },
+            ],
+
+        },
+
+    ]
+
+
+    //listeners: { afterrender: 'onAfterRender' },
+    /* cls: 'drag',
+    margin: 3,
+    layout: {
+        type: 'hbox',
+        align: 'stretch'
+    },
+    items: [
+        {
+            extend: 'Ext.panel.Panel',
+            title: 'Drag And Drop',
+            id: 'sample',
+            items: [
+                {
+                    text: 'my sample 1'
                 }
-            },],
-
+            ]
+        },
+         {
+            xtype: 'gridpanel',
+            cls: "table2",
+            stripeRows: true,
+            title: 'Time Table',
+            width: '40%',
+            html: '<b><div id="012" class="drag green clone">Room</div></b>',
             store: {
                 extend: 'Ext.data.ArrayStore',
                 fields: [
-                    { name: 'company' },
-                    { name: 'price', type: 'float' },
-                    { name: 'change', type: 'float' },
-                    { name: 'pctChange', type: 'float' },
-                    { name: 'lastChange', type: 'date', dateFormat: 'n/j h:ia' }
+                    { name: 'day', type: 'string' },
+                    { name: '7-8', type: 'string' },
+                    { name: '8-9', type: 'string' },
+                    { name: '9-10', type: 'string' },
+                    { name: '10-11', type: 'string' },
+                    { name: '11-12', type: 'string' },
+                    { name: '12-13', type: 'string' },
+                    { name: '13-14', type: 'string' },
                 ],
                 data: [
-                    ['3m Co', 71.72, 0.02, 0.03, '9/1 12:00am'],
-                    ['Alcoa Inc', 29.01, 0.42, 1.47, '9/1 12:00am'],
-                    ['Altria Group Inc', 83.81, 0.28, 0.34, '9/1 12:00am'],
-                    ['American Express Company', 52.55, 0.01, 0.02, '9/1 12:00am'],
-                    ['American International Group, Inc.', 64.13, 0.31, 0.49, '9/1 12:00am'],
-                    ['AT&T Inc.', 31.61, -0.48, -1.54, '9/1 12:00am'],
-                    ['Boeing Co.', 75.43, 0.53, 0.71, '9/1 12:00am'],
-                    ['Caterpillar Inc.', 67.27, 0.92, 1.39, '9/1 12:00am'],
-                    ['Citigroup, Inc.', 49.37, 0.02, 0.04, '9/1 12:00am'],
-                    ['E.I. du Pont de Nemours and Company', 40.48, 0.51, 1.28, '9/1 12:00am'],
-                    ['Exxon Mobil Corp', 68.1, -0.43, -0.64, '9/1 12:00am'],
-                    ['General Electric Company', 34.14, -0.08, -0.23, '9/1 12:00am'],
-                    ['General Motors Corporation', 30.27, 1.09, 3.74, '9/1 12:00am'],
-                    ['Hewlett-Packard Co.', 36.53, -0.03, -0.08, '9/1 12:00am'],
-                    ['Honeywell Intl Inc', 38.77, 0.05, 0.13, '9/1 12:00am'],
-                    ['Intel Corporation', 19.88, 0.31, 1.58, '9/1 12:00am'],
-                    ['International Business Machines', 81.41, 0.44, 0.54, '9/1 12:00am'],
-                    ['Johnson & Johnson', 64.72, 0.06, 0.09, '9/1 12:00am'],
-                    ['JP Morgan & Chase & Co', 45.73, 0.07, 0.15, '9/1 12:00am'],
-                    ['McDonald\'s Corporation', 36.76, 0.86, 2.40, '9/1 12:00am'],
-                    ['Merck & Co., Inc.', 40.96, 0.41, 1.01, '9/1 12:00am'],
-                    ['Microsoft Corporation', 25.84, 0.14, 0.54, '9/1 12:00am'],
-                    ['Pfizer Inc', 27.96, 0.4, 1.45, '9/1 12:00am'],
-                    ['The Coca-Cola Company', 45.07, 0.26, 0.58, '9/1 12:00am'],
-                    ['The Home Depot, Inc.', 34.64, 0.35, 1.02, '9/1 12:00am'],
-                    ['The Procter & Gamble Company', 61.91, 0.01, 0.02, '9/1 12:00am'],
-                    ['United Technologies Corporation', 63.26, 0.55, 0.88, '9/1 12:00am'],
-                    ['Verizon Communications', 35.57, 0.39, 1.11, '9/1 12:00am'],
-                    ['Wal-Mart Stores, Inc.', 45.45, 0.73, 1.63, '9/1 12:00am']
+                    ['Monday',],
+                    ['Tuesday',],
+                    ['Wednesday',],
+                    ['Thursday',],
+                    ['Friday',],
+                    ['Saturday',],
+                    ['Sunday',],
+                ]
+            },
+            columns: [
+                {
+                    header: 'Day',
+                    sortable: true,
+                    dataIndex: 'day',
+                    flex: 1,
+                    tdCls: 'mark dark'
+                },
+                {
+                    text: '7:00 - 8:00',
+                    sortable: true,
+                    dataIndex: '1',
+                    flex: 1
+                },
+                {
+                    header: '8:00 - 9:00',
+                    sortable: true,
+                    dataIndex: '2',
+                    flex: 1
+                },
+                {
+                    header: '9:00 - 10:00',
+                    sortable: true,
+                    dataIndex: '3',
+                    flex: 1
+                },
+                {
+                    header: '10:00 - 11:00',
+                    sortable: true,
+                    dataIndex: '4',
+                    flex: 1
+                },
+                {
+                    header: '11:00 - 12:00',
+                    sortable: true,
+                    dataIndex: '5',
+                    flex: 1,
+                },
+
+            ],
+            fbar: [
+                {
+                    hidden: false,
+                    html: '<i>my simple text</i> <div id="obj_new" style="height: 6px;width: 11px;"></div>',
+                }
+            ]
+        },
+        {
+
+            xtype: 'gridpanel',
+            cls: "table1",
+            margin: '0 2',
+            width: '30%',
+            stripeRows: true,
+            title: 'Associations',
+            store: {
+                data: [
+                    { name: 'SIS3201', courseLecturer: 'SJ', room: 'IICD UP', },
+                    { name: 'SIS3202', courseLecturer: 'SR', room: 'S2.39' },
+                    { name: 'SIS3203', courseLecturer: 'BM', room: 'S2.39' },
+                    { name: 'SIS3204', courseLecturer: 'KBM', room: 'S2.40' },
+                    { name: 'SIS3205', courseLecturer: 'Research', room: 'S2.37' },
                 ]
             },
 
-    },
-    ],
+            columns: [
+                {
+                    text: 'Course Unit',
+                    dataIndex: 'name',
+                    tdCls: 'dark',
+                    xtype: 'templatecolumn',
+                    tpl: '<b><div id="{name}" class="drag green clone">{name}</div></b>',
+                },
+                { text: 'Lecturer', dataIndex: 'courseLecturer', flex: 1 },
+                {
+                    text: 'Room',
+                    //dataIndex: 'room',
+                    flex: 1,
+                    tdCls: 'dark',
+                    xtype: 'templatecolumn',
+                    tpl: '<b><div id="{room}" class="drag green clone">{room}</div></b>',
+                },
+            ],
+        }, 
+        {
+            extend: 'Ext.Component',
+            cls: 'hopscotch-bubble-container',
+            width: '100%',
+            padding: 15,
+            title: 'sample',
+            store: {
+                data: [
+                    { name: 'SIS3201', courseLecturer: 'SJ', room: 'IICD UP', },
+                    { name: 'SIS3202', courseLecturer: 'SR', room: 'S2.39' },
+                    { name: 'SIS3203', courseLecturer: 'BM', room: 'S2.39' },
+                    { name: 'SIS3204', courseLecturer: 'KBM', room: 'S2.40' },
+                    { name: 'SIS3205', courseLecturer: 'Research', room: 'S2.37' },
+                ]
+            },
+            //id: 'test',
+            html: [
+              '<div id="main_container">',
+                  '<!-- tables inside this DIV could have draggable content -->',
+                  '<div id="drag">',
+          
+                      '<!-- left container -->',
+                      '<div id="left">',
+                          '<table id="table1">',
+                              '<colgroup>',
+                                  '<col width="200"/>',
+                              '</colgroup>',
+                              '<tbody>',
+                                  '<?php subjects() ?>',
+                                  '<tr><td class="trash" title="Trash">{room}Trash</td></tr>',
+                              '</tbody>',
+                          '</table>',
+                      '</div><!-- left container -->',
+                      
+                      '<!-- right container -->',
+                      '<div id="right">',
+                          '<table id="table2">',
+                              '<colgroup>',
+                                  '<col width="50"/>',
+                                  '<col width="100"/>',
+                                  '<col width="100"/>',
+                                  '<col width="100"/>',
+                                  '<col width="100"/>',
+                                  '<col width="100"/>',
+                              '</colgroup>',
+                              '<tbody>',
+                                  '<tr>',
+                                      '<!-- if checkbox is checked, clone school subjects to the whole table row  -->',
+                                      '<td class="mark blank"><input id="week" type="checkbox" title="Apply school subjects to the week"/></td>',
+                                      '<td class="mark dark">Monday</td>',
+                                      '<td class="mark dark">Tuesday</td>',
+                                      '<td class="mark dark">Wednesday</td>',
+                                      '<td class="mark dark">Thursday</td>',
+                                      '<td class="mark dark">Friday</td>',
+                                  '</tr>',
+      
+                                  "<?php timetable('08:00', 1) ?>",
+                                  "<?php timetable('09:00', 2) ?>",
+                                  "<?php timetable('10:00', 3) ?>",
+                                  "<?php timetable('11:00', 4) ?>",
+                                  "<?php timetable('12:00', 5) ?>",
+                                  '<tr>',
+                                      '<td class="mark dark">13:00</td>',
+                                      '<td class="mark lunch" colspan="5">Lunch</td>',
+                                  '</tr>',
+                                  "<?php timetable('14:00', 7) ?>",
+                                  "<?php timetable('15:00', 8) ?>",
+                                  "<?php timetable('16:00', 9) ?>",
+                              '</tbody>',
+                          '</table>',
+                      '</div><!-- right container -->',
+                  '</div><!-- drag container -->',
+                  '<br/>',
+                  '<div id="message">Please drag school subjects to the timetable</div>',
+                  '<div class="button_container">',
+                      '<input type="button" value="Save" class="button" onclick="save()" title="Save timetable"/>',
+                  '</div>',
+              '</div><!-- main container -->',
+            ]
+            
+        } 
+    ] */
+
+
+
 });
