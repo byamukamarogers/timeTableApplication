@@ -1,18 +1,17 @@
 
-Ext.define('TimeTableApp.view.course.courseForm', {
+Ext.define('TimeTableApp.view.course.courseType',{
     extend: 'Ext.panel.Panel',
-    xtype: 'courseForm',
+    xtype: 'courseTypes',
 
     requires: [
-        'TimeTableApp.view.course.courseFormController',
-        'TimeTableApp.view.course.courseFormModel'
+        'TimeTableApp.view.course.courseTypeController',
+        'TimeTableApp.view.course.courseTypeModel'
     ],
 
-    controller: 'course-courseform',
+    controller: 'course-coursetype',
     viewModel: {
-        type: 'course-courseform'
+        type: 'course-coursetype'
     },
-    listeners: { afterrender: 'onAfterRender' },
     items: [
         {
             xtype: 'container',
@@ -188,19 +187,14 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                     ],
                     buttons: [
                         {
-                            text: 'Add New CourseType',
-                            handler: 'onAddCourseType'
-                        },
-                        {
                             text: 'Reset'
                         },
                         {
-                            text: 'Save Course Unit',
-                            handler: 'onCourseUnitSubmitClicked'
+                            text: 'Save '
                         }
                     ],
                 },
             ]
         },
-    ]
+    ],
 });

@@ -31,7 +31,8 @@ Ext.define('TimeTableApp.view.staff.staffForm',{
                     items: [{
                         fieldLabel: 'Staff Id',
                         bind: '{staffId}',
-                        allowBlank: false
+                        allowBlank: true,
+                        readOnly: true
                     }, 
                     {
                         fieldLabel: 'Name',

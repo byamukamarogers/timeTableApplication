@@ -21,7 +21,7 @@ Ext.define('TimeTableApp.view.department.departmentForm',{
             items: [
                 {
                     title: 'Add New Department',
-                    bodyPadding: 5,
+                    bodyPadding: 2,
                     width: '50%',
                     layout: 'anchor',
                     defaults: {
@@ -31,7 +31,8 @@ Ext.define('TimeTableApp.view.department.departmentForm',{
                     items: [{
                         fieldLabel: 'Department Id',
                         bind: '{departmentId}',
-                        allowBlank: false
+                        allowBlank: false,
+                        readOnly: true
                     }, {
                         fieldLabel: 'Department Name',
                         bind: '{departmentName}',
@@ -58,6 +59,7 @@ Ext.define('TimeTableApp.view.department.departmentForm',{
                         text: 'Reset'
                     }, {
                         text: 'Submit',
+                        iconCls: 'x-fa fas fa-save',
                         handler: 'onDepartmentSubmitClicked'
                     }],
                 },

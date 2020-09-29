@@ -20,7 +20,7 @@ Ext.define('TimeTableApp.view.institution.institutionForm',{
             margin: 5,
             items: [     
                 {
-                    title: 'Add New University',
+                    title: 'ADD UNIVERSITY OR INSTITUTION',
                     bodyPadding: 5,
                     width: '50%',
                     layout: 'anchor',

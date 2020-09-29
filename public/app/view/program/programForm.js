@@ -31,7 +31,8 @@ Ext.define('TimeTableApp.view.program.programForm',{
                     items: [{
                         fieldLabel: 'Program Id',
                         bind: '{programId}',
-                        allowBlank: false
+                        allowBlank: true,
+                        readOnly: true
                     }, {
                         fieldLabel: 'Program Name',
                         bind: '{programName}',

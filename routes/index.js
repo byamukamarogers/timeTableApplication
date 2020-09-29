@@ -110,7 +110,7 @@ router.post('/addSsession', async function (req, res, next) {
       }
     }
     if (rawdata.ssessionId) {
-      result = await models.Ssession.update(data,{where: {ssessionId: rawdata.ssessionId}});
+      result = await models.Ssession.update(data, { where: { ssessionId: rawdata.ssessionId } });
     } else {
       result = await models.Ssession.create(data);
     }
@@ -199,7 +199,6 @@ router.get('/courseunits', async function (req, res, next) {
 router.post('/addCourseUnit', async function (req, res, next) {
   let rawdata = req.body;
   let data = {};
-  console.log(rawdata);
   try {
     let result;
     for (key in rawdata) {
@@ -208,9 +207,9 @@ router.post('/addCourseUnit', async function (req, res, next) {
       }
     }
     if (rawdata.courseId) {
-      result = await models.Course.create(data);
+      result = await models.Course.create(data, { where: { courseId: data.courseId } });
     } else {
-      console.log("An error occured");
+      result = await models.Course.create(data);
     }
     res.send({ status: 'OK', data: result });
   } catch (err) {
@@ -234,7 +233,6 @@ router.get('/programs', async function (req, res, next) {
 router.post('/addProgram', async function (req, res, next) {
   let rawdata = req.body;
   let data = {};
-  console.log(rawdata);
   try {
     let result;
     for (key in rawdata) {
@@ -243,9 +241,9 @@ router.post('/addProgram', async function (req, res, next) {
       }
     }
     if (rawdata.programId) {
-      result = await models.Program.create(data);
+      result = await models.Program.create(data, { where: { programId: data.programId } });
     } else {
-      console.log("An error occured");
+      result = await models.Program.create(data);
     }
     res.send({ status: 'OK', data: result });
   } catch (err) {
@@ -261,7 +259,6 @@ router.get('/staff', async function (req, res, next) {
 router.post('/addStaff', async function (req, res, next) {
   let rawdata = req.body;
   let data = {};
-  console.log(rawdata);
   try {
     let result;
     for (key in rawdata) {
@@ -270,9 +267,9 @@ router.post('/addStaff', async function (req, res, next) {
       }
     }
     if (rawdata.staffId) {
-      result = await models.Staff.create(data);
+      result = await models.Staff.create(data, { where: { staffId: data.staffId } });
     } else {
-      console.log("An error occured");
+      result = await models.Staff.create(data);
     }
     res.send({ status: 'OK', data: result });
   } catch (err) {
@@ -297,9 +294,9 @@ router.post('/addDepartment', async function (req, res, next) {
       }
     }
     if (rawdata.departmentId) {
-      result = await models.Department.create(data);
+      result = await models.Department.update(data, { where: { departmentId: data.departmentId } });
     } else {
-      console.log("An error occured");
+      result = await models.Department.create(data);
     }
     res.send({ status: 'OK', data: result });
   } catch (err) {
@@ -324,9 +321,9 @@ router.post('/addFaculty', async function (req, res, next) {
     }
 
     if (rawdata.facultyId) {
-      result = await models.Faculty.create(data);
+      result = await models.Faculty.update(data, { where: { facultyId: data.facultyId } });
     } else {
-      console.log("An error occured");
+      result = await models.Faculty.create(data);
     }
     res.send({ status: 'OK', data: result });
 

@@ -27,15 +27,15 @@ module.exports = function (sequelize, DataTypes) {
             field: 'address'
         },
         email: {
-            type: DataTypes.STRING(13),
+            type: DataTypes.STRING(100),
             field: 'email'
         },
         mobilePhone: {
-            type: DataTypes.STRING(13),
+            type: DataTypes.STRING(15),
             field: 'phone1'
         },
         telePhone: {
-            type: DataTypes.STRING(13),
+            type: DataTypes.STRING(15),
             field: 'phone2'
         },
         departmentId: {

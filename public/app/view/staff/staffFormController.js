@@ -18,7 +18,6 @@ Ext.define('TimeTableApp.view.staff.staffFormController', {
     onStaffSubmitClicked: async function () {
         let data = this.getViewModel().getData();
         this.saveData(data);
-        this.loadAllGridData();
     },
 
     cleanupData: function (rawData) {
@@ -45,7 +44,7 @@ Ext.define('TimeTableApp.view.staff.staffFormController', {
         if (response.responseText) {
             let result = JSON.parse(response.responseText);
             if (result.status === 'OK') {
-                Ext.Msg.alert('Faculty Of Science TimeTable Application', 'Data has been successfully saved',);
+                Ext.Msg.alert('FOS TimeTable Application', 'Data has been successfully saved');
                 let parent = form.up('window');
                 if (parent) {
                     parent.destroy();

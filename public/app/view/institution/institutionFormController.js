@@ -34,12 +34,13 @@ Ext.define('TimeTableApp.view.institution.institutionFormController', {
         if (response.responseText) {
             let result = JSON.parse(response.responseText);
             if (result.status === 'OK') {
-                Ext.Msg.alert('Faculty Of Science TimeTable Application', 'Data has been successfully saved',);
+                Ext.Msg.alert('FOS Time Table', 'Data has been successfully saved');
                 let parent = form.up('window');
                 if (parent) {
                     parent.destroy();
                 }
             }
+            
         }
     },
 
