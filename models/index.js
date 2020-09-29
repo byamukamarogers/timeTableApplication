@@ -40,5 +40,6 @@ db.TimeTable.hasOne(db.Room, {foreignKey: 'roomId'});
 /* sequelize.sync({ force: true })
   .then(() => {
     console.log(`Tables created!`)
-  }) */
+  }); */
+
 module.exports = db;

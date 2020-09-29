@@ -8,19 +8,17 @@ module.exports = function (sequelize, DataTypes) {
         },
         facultyName: {
             type: DataTypes.STRING(50),
-            field: 'facultyname',
-
+            field: 'facultyname'
         },
         institutionId: {
             type: DataTypes.INTEGER,
-            field: 'institutionid',
-
-        },
-    }, {
+            field: 'institutionid'
+        }
+    }, 
+    {
         tableName: 'Faculty',
         underscored: true,
-        timestamps: true,
-
+        timestamps: true
     })
     return Faculty;
 }

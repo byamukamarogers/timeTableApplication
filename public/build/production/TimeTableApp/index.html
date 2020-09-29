@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html manifest="cache.appcache">
+
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="UTF-8">
@@ -39,14 +40,20 @@
             // any data is pulled from it.
             //
             //return function (manifest) {
-                // peek at / modify the manifest object
+            // peek at / modify the manifest object
             //};
         };
     </script>
     <style>
-        .x-column-header-inner .x-column-header-text{
+        #ttgrid .x-column-header-inner .x-column-header-text {
             white-space: normal;
         }
+        #ttgrid .x-grid-cell-inner {
+    
+    font-size: 12px !important;
+}
+
+        
     </style>
 
     <!-- The line below must be kept intact for Sencha Cmd to build your application -->
@@ -126,5 +133,7 @@ Microloader.appUpdate)},1E3)},checksum:function(content,hash){if(!content||!hash
 304===result.status||Boot.env.phantom||0===result.status&&0<result.content.length?rst.content=result.content:rst.error=!0:rst.error=!0;return rst}};return Microloader}();Ext.manifest=Ext.manifest||'bootstrap';Ext.Microloader.run();</script>
 
 </head>
+
 <body></body>
+
 </html>
