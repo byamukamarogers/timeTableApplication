@@ -13,8 +13,6 @@ Ext.define('TimeTableApp.view.room.room', {
         type: 'room-room'
     },
     listeners: { afterrender: 'onAfterRender' },
-    
-    autoScroll: true,
     items: [
         {
             xtype: 'form',

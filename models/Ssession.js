@@ -8,12 +8,12 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true
         },
         from: {
-            type: DataTypes.TIME,
+            type: DataTypes.DATE,
             field: 'from',
             allowNull: false,
         },
         to: {
-            type: DataTypes.TIME,
+            type: DataTypes.DATE,
             field: 'to',
             allowNull: false,
         },

@@ -22,76 +22,34 @@ Ext.define('TimeTableApp.view.room.roomListController', {
         let response = await Ext.Ajax.request({ url: '/rooms', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            var cleanRecords = [];
-            for (var i = 0; i < records.length; i++) {
-                var singleRecord = records[i];
-                singleRecord["facultyName"] = singleRecord.Faculty.facultyName;
-                delete singleRecord.Faculty;
-                cleanRecords.push(singleRecord);
-            }
-            let store = Ext.create('Ext.data.Store', { data: cleanRecords });
+            let store = Ext.create('Ext.data.Store', { data: records});
             allList.setStore(store);
             store.load();
         }
     },
-    // pasted here
-
-    onAdd: function (button, e, options) {
-        this.createAddDialog();
-    },
-
-    onEdit: function (button) {
-        this.createDialog(button.getWidgetRecord());
-    },
-
-    onCancel: function (button, e, options) {
-        var me = this;
-        me.dialog = Ext.destroy(me.dialog);
-    },
-
-    onDelete: function (button, e, options) {
-        var record = button.getWidgetRecord();
-        Ext.Msg.show({
-            title: 'Delete?',
-            msg: 'Are you sure you want to delete?',
-            buttons: Ext.Msg.YESNO,
-            icon: Ext.Msg.QUESTION,
-            fn: function (buttonId) {
-                if (buttonId == 'yes') {
-                    record.drop();
-                }
-            }
-        });
-    },
-
-    viewSessionChanges: function () {
-        var changes = this.getView().getSession().getChanges();
-        if (changes !== null) {
-            new Ext.window.Window({
-                autoShow: true,
-                title: 'Session Changes',
+    
+    onEditRoom: async function () {
+        let selection = this.lookupReference("grdallRooms").getSelection();
+        if (selection.length > 0 ) {
+            let data = selection[0].data;
+            Ext.create('Ext.window.Window', {
+                title: 'ROOM FORM',
+                iconCls: 'x-fa fa-edit',
+                width: '80%',
+                bodyPadding: 5,
                 modal: true,
-                width: 600,
-                height: 400,
-                layout: 'fit',
-                items: {
-                    xtype: 'textarea',
-                    value: JSON.stringify(changes, null, 4)
-                }
-            });
+                items: [
+                    {
+                        header: false,
+                        xtype: 'roomForm',
+                        formData: data
+                    }
+                ]
+            }).show();
+        
         } else {
-            Ext.Msg.alert('No Changes', 'There are no changes to the session.');
+            Ext.Msg.alert('Error', 'Please select a room to edit');
         }
-    },
-    createAddDialog: function () {        
-        let win = Ext.create('Ext.window.Window', {
-            title: 'Add Lecture Room',          
-            closable: true,
-            items: [{
-                xtype: 'roomView',
-            }]
-        });
-        win.show();
     }
 
 

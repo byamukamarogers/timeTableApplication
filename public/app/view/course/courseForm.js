@@ -26,8 +26,6 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                     xtype: 'form',
                     bodyPadding: 5,
                     width: '50%',
-                    reset: true,
-                    //title:'Add Course Unit',
                     layout: 'hbox',
                     items: [
                         {
@@ -42,12 +40,14 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                 {
                                     fieldLabel: 'Course ID',
                                     bind: '{courseId}',
-                                    allowBlank: false
-                                }, {
+                                    readOnly: true
+                                },
+                                {
                                     fieldLabel: 'Course Name',
                                     bind: '{courseName}',
                                     allowBlank: false
-                                }, {
+                                },
+                                {
                                     fieldLabel: 'Course Code',
                                     bind: '{courseCode}',
                                     allowBlank: false
@@ -56,7 +56,7 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                     fieldLabel: 'Credit Units',
                                     xtype: 'numberfield',
                                     bind: '{creditUnits}',
-                                    allowBlank: false
+                                    allowBlank: true
                                 },
                                 {
                                     xtype: 'combobox',
@@ -106,11 +106,10 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                     xtype: 'combobox',
                                     bind: '{courseTypeId}',
                                     allowBlank: false,
-                                    reference:'cmboCourseTypes',
+                                    reference: 'cmboCourseTypes',
                                     displayField: 'courseTypeName',
                                     valueField: 'courseTypeId',
-                                    forceSelection: true,
-                                    queryMode: 'local'
+                                    forceSelection: true
                                 },
                             ],
                         },
@@ -132,7 +131,7 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                     displayField: 'programName',
                                     valueField: 'programId',
                                     forceSelection: true,
-                                    queryMode: 'local'
+                                    editable: false
                                 },
                                 {
                                     xtype: 'combobox',
@@ -142,13 +141,14 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                     displayField: 'name',
                                     valueField: 'staffId',
                                     forceSelection: true,
-                                    queryMode: 'local'
+                                    editable: false
                                 },
                                 {
                                     xtype: 'numberfield',
                                     fieldLabel: 'No. of Lectures Per week',
                                     allowBlank: false,
                                     bind: '{numberOfLecturesPerWeek}',
+                                    minValue: 1
                                 },
                                 {
                                     xtype: 'combobox',
@@ -176,11 +176,7 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                     fieldLabel: 'Maximum No. of Lectures Per Day',
                                     allowBlank: false,
                                     bind: '{maxNumberOfLecturesPerDay}',
-                                },
-                                {
-                                    fieldLabel: 'Created By',
-                                    allowBlank: false,
-                                    bind: '{staffId}',
+                                    minValue: 1
                                 }
                             ],
 
@@ -188,14 +184,15 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                     ],
                     buttons: [
                         {
-                            text: 'Add New CourseType',
-                            handler: 'onAddCourseType'
-                        },
-                        {
-                            text: 'Reset'
+                            text: 'Reset',
+                            iconCls: 'x-fa fas fa-refresh',
+                            handler: function () {
+                                this.up('form').getForm().reset();
+                            }
                         },
                         {
                             text: 'Save Course Unit',
+                            formBind: true,
                             handler: 'onCourseUnitSubmitClicked'
                         }
                     ],

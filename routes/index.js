@@ -49,7 +49,6 @@ router.get('/loadLectureClasses', async function (req, res, next) {
 });
 router.post('/addLectureClass', async function (req, res, next) {
   let rawdata = req.body;
-  console.log(rawdata);
   let data = {};
   try {
     let result;
@@ -59,6 +58,8 @@ router.post('/addLectureClass', async function (req, res, next) {
       }
     }
     if (rawdata.classId) {
+      result = await models.LectureClass.update(data,{where: { classId: data.classId}});
+    }else{
       result = await models.LectureClass.create(data);
     }
 
@@ -69,7 +70,7 @@ router.post('/addLectureClass', async function (req, res, next) {
   }
 });
 router.get('/rooms', async function (req, res, next) {
-  let duration = await models.Room.findAll({ include: [models.Faculty] });
+  let duration = await models.Room.findAll({ include: [models.Faculty, models.RoomType] });
   res.send(duration);
 });
 router.post('/addDay', async function (req, res, next) {
@@ -127,7 +128,6 @@ router.get('/allSsession', async function (req, res, next) {
 router.post('/addRoom', async function (req, res, next) {
   let rawdata = req.body;
   let data = {};
-  console.log(rawdata);
   try {
     let result;
     for (key in rawdata) {
@@ -136,23 +136,9 @@ router.post('/addRoom', async function (req, res, next) {
       }
     }
     if (rawdata.roomId) {
+      result = await models.Room.update(data,{ where: { roomId: data.roomId}});
+    }else {
       result = await models.Room.create(data);
-    } else if (rawdata.roomName) {
-      let duration = '';
-      console.log(rawdata.roomName);
-      try {
-        if (rawdata.roomNameSearch === '') {
-          duration = await models.Room.findAll({ where: { 'roomName': rawdata.roomName }, include: [models.Faculty] });
-
-        } else {
-
-        }
-      } catch (err) {
-        res.status(400).send("Sorry. Something happened on the server. Contact System Admin. ");
-        console.log(err);
-      }
-    } else {
-
     }
 
     res.send({ status: 'OK', data: result });
@@ -168,7 +154,6 @@ router.get('/roomtypes', async function (req, res, next) {
 router.post('/addRoomType', async function (req, res, next) {
   let rawdata = req.body;
   let data = {};
-  console.log(rawdata);
   try {
     let result;
     for (key in rawdata) {
@@ -177,9 +162,9 @@ router.post('/addRoomType', async function (req, res, next) {
       }
     }
     if (rawdata.roomTypeId) {
-      result = await models.RoomType.create(data);
+      result = await models.RoomType.update(data,{  where: { roomTypeId: data.roomTypeId }});
     } else {
-      console.log("An error occured");
+      result = await models.RoomType.create(data);
     }
     res.send({ status: 'OK', data: result });
   } catch (err) {
@@ -192,6 +177,28 @@ router.get('/loadCourseTypes', async function (req, res, next) {
   let courseType = await models.CourseType.findAll();
   res.send(courseType);
 });
+router.post('/coursetype', async function (req, res, next) {
+  let rawdata = req.body;
+  let data = {};
+  try {
+    let result;
+    for (key in rawdata) {
+      if (rawdata[key] !== '') {
+        data[key] = rawdata[key];
+      }
+    }
+    if (rawdata.courseTypeId) {
+      result = await models.CourseType.update(data, { where: { courseTypeId: data.courseTypeId } });
+    } else {
+      result = await models.CourseType.create(data);
+    }
+    res.send({ status: 'OK', data: result });
+  } catch (err) {
+    res.status(400).send("Sorry. Something happened on the server. Contact System Admin. ");
+    console.log(err);
+  }
+});
+
 router.get('/courseunits', async function (req, res, next) {
   let course = await models.Course.findAll({ include: [models.Program] });
   res.send(course);
@@ -207,7 +214,7 @@ router.post('/addCourseUnit', async function (req, res, next) {
       }
     }
     if (rawdata.courseId) {
-      result = await models.Course.create(data, { where: { courseId: data.courseId } });
+      result = await models.Course.update(data, { where: { courseId: data.courseId } });
     } else {
       result = await models.Course.create(data);
     }
@@ -241,7 +248,7 @@ router.post('/addProgram', async function (req, res, next) {
       }
     }
     if (rawdata.programId) {
-      result = await models.Program.create(data, { where: { programId: data.programId } });
+      result = await models.Program.update(data, { where: { programId: data.programId } });
     } else {
       result = await models.Program.create(data);
     }
@@ -267,7 +274,7 @@ router.post('/addStaff', async function (req, res, next) {
       }
     }
     if (rawdata.staffId) {
-      result = await models.Staff.create(data, { where: { staffId: data.staffId } });
+      result = await models.Staff.update(data, { where: { staffId: data.staffId } });
     } else {
       result = await models.Staff.create(data);
     }

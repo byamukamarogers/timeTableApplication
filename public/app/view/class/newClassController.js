@@ -15,5 +15,27 @@ Ext.define('TimeTableApp.view.class.newClassController', {
             store.load();
         }
     },
+    onEditClass: async function(){
+        let selection = this.lookupReference("grdLectureClasses").getSelection();
+        if(selection.length> 0){
+            let data = selection[0].data;
+            Ext.create('Ext.window.Window', {
+                title: 'CLASS REGISTRATION FORM',
+                iconCls: 'x-fa fa-edit',
+                width: '80%',
+                bodyPadding: 5,
+                modal: true,
+                items: [
+                    {
+                        header: false,
+                        xtype: 'newClassForm',
+                        formData: data
+                    }
+                ]
+            }).show();
+        } else {
+            Ext.Msg.alert('Error', 'Please select a Class');
+        }
+    }
 
 });

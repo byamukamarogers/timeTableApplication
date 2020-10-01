@@ -55,6 +55,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             field: 'createdby',
             allowNull: false,
+            defaultValue: 1
         }
     }, {
         tableName: 'lectureclass',

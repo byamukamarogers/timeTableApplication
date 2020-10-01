@@ -18,8 +18,7 @@ Ext.define('TimeTableApp.view.roomTypes.RoomType',{
             xtype: 'container',
             layout: 'hbox',
             margin: '3 0 0 0',
-            items: [
-                //Room registration form        
+            items: [      
                 {
                     title: 'Register New Room Type',
                     bodyPadding: 5,

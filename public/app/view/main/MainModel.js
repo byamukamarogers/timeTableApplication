@@ -5,6 +5,11 @@ Ext.define('TimeTableApp.view.main.MainModel', {
     extend: 'Ext.app.ViewModel',
 
     alias: 'viewmodel.main',
+    data: [
+        {
+            createdBy: 1
+        }
+    ]
 
     /* data: {
         name: 'TimeTableApp',

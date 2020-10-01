@@ -16,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING(50),
             field: 'coursetypecode',
             allowNull: false,
-            unique: true,
+            unique: true
         },
         courseTypeDescription: {
             type: DataTypes.STRING(150),
@@ -27,6 +27,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             field: 'staffid',
             allowNull: false,
+            defaultValue: 1
         },
         updatedBy: {
             type: DataTypes.INTEGER,

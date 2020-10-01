@@ -19,7 +19,6 @@ Ext.define('TimeTableApp.view.room.roomList', {
             layout: 'hbox',
             margin: '3 0 0 0',
             items: [
-                //Grid to display all Available rooms
                 {
                     margin: '0 0 0 0',
                     bodyPadding: 0,
@@ -35,31 +34,66 @@ Ext.define('TimeTableApp.view.room.roomList', {
                         {
                             title: 'Lecture Rooms',
                             reference: 'grdallRooms',
-                            extend: 'TimeTableApp.view.util.base.Grid',
-                            xtype: 'baseGrid',
-                            plugins: [
+                            xtype: 'grid',
+                            tbar: [
                                 {
-                                    enableDeleteButton: false,
-                                    ptype: 'cellediting',
-                                    clicksToEdit: 2,
-                                    pluginId: 'cellplugin'
+                                    xtype: 'combobox',
+                                    emptyText: 'Search ...',
+                                    width: 200
                                 },
                                 {
-                                    ptype: 'gridfilters'
+                                    xtype: 'button',
+                                    text: 'Edit',
+                                    iconCls: 'x-fa fas fa-edit',
+                                    handler: 'onEditRoom'
                                 }
                             ],
                             columns: [
-                                { text: 'Room Id', dataIndex: 'roomId', flex: 0.5, editable: false },
-                                { text: 'Room Name', dataIndex: 'roomName', flex: 1, editable: true },
-                                { text: 'Capacity', dataIndex: 'capacity', flex: 1, editable: true },
-                                { text: 'Location', dataIndex: 'location', editable: true },
-                                { text: 'Room Type', dataIndex: 'roomTypeId', editable: true },
-                                { text: 'Faculty', dataIndex: 'facultyName', flex: 1, editable: true },
-
+                                {
+                                    text: 'Room Id',
+                                    dataIndex: 'roomId',
+                                    flex: 0.2,
+                                    hidden: true
+                                },
+                                {
+                                    text: 'Room Name',
+                                    dataIndex: 'roomName',
+                                    flex: 0.3
+                                },
+                                {
+                                    text: 'Capacity',
+                                    dataIndex: 'capacity',
+                                    flex: 0.2
+                                },
+                                {
+                                    text: 'Room Type',
+                                    dataIndex: 'roomTypeId',
+                                    flex: 0.2,
+                                    renderer: function(value, metaData, record){
+                                        return record.data.RoomType.roomTypeName;
+                                    }
+                                },
+                                {
+                                    text: 'Location',
+                                    dataIndex: 'location',
+                                    flex: 0.3
+                                }
                             ],
-                            selModel: {
-                                selType: 'cellmodel'
+                            bbar: {
+                                xtype: 'pagingtoolbar',
+                                displayInfo: true,
+                                displayMsg: 'Display records {0} - {1} of {2}',
+                                emptyMsg: 'No Record to display'
                             },
+                            plugins: [
+                                {
+                                    ptype: 'rowexpander',
+                                    rowBodyTpl: [
+                                        '<b>Location :</b> {location}<br/>',
+                                        '<b>Faculty :</b> {Faculty.facultyName}'
+                                    ]
+                                }
+                            ]
                         }
                     ],
 

@@ -15,18 +15,14 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
     items: [
         {
             xtype: 'container',
-            scrollable: true,
             bodyPadding: 5,
             layout: 'anchor',
             margin: '3 3 0 0',
             items: [
                 {
-                    extend: 'Ext.form.Panel',
                     xtype: 'form',
                     bodyPadding: 5,
                     width: '50%',
-                    reset: true,
-                    //title:'Add CLIENT',
                     layout: 'hbox',
                     items: [
                         {
@@ -40,8 +36,8 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                             items: [
                                 {
                                     fieldLabel: 'Class ID',
-                                    allowBlank: false,
                                     bind: '{classId}',
+                                    readOnly: true
                                 },
                                 {
                                     fieldLabel: 'Class Name',
@@ -54,7 +50,6 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                     displayField: 'name',
                                     bind: '{isProgram}',
                                     valueField: 'id',
-                                    allowBlank: false,
                                     store: {
                                         data: [
                                             { id: 'true', name: 'Yes' },
@@ -71,9 +66,8 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                     displayField: 'programName',
                                     bind: '{programId}',
                                     valueField: 'programId',
-                                    allowBlank: false,
                                     reference: 'cmboPrograms',
-                                    forceSelection: true,
+                                    forceSelection: true
                                 },
                                 {
                                     id: 'isCourseOpt',
@@ -83,7 +77,6 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                     displayField: 'name',
                                     bind: '{isCourse}',
                                     valueField: 'id',
-                                    allowBlank: false,
                                     store: {
                                         data: [
                                             { id: 'true', name: 'Yes' },
@@ -99,11 +92,10 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                     displayField: 'courseName',
                                     bind: '{courseId}',
                                     valueField: 'courseId',
-                                    allowBlank: false,
                                     reference: 'cmboCourse',
                                     forceSelection: true,
-                                },
-                            ],
+                                }
+                            ]
                         },
                         {
                             margin: '0 5 0 10',
@@ -121,7 +113,6 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                     displayField: 'name',
                                     bind: '{semester}',
                                     valueField: 'id',
-                                    allowBlank: false,
                                     store: {
                                         data: [
                                             { id: '1', name: 'ONE' },
@@ -171,17 +162,26 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                 {
                                     fieldLabel: 'Created By',
                                     allowBlank: false,
+                                    hidden:true,
                                     bind: '{createdBy}',
+                                    value: 1
                                 }
-                            ],
-
-                        },
+                            ]
+                        }
                     ],                    
-                    buttons: [{
+                    buttons: [
+                        {
                         text: 'Reset',
-                    }, {
+                        iconCls: 'x-fa fas fa-refresh',
+                        handler: function(){
+                            this.up('form').getForm().reset();
+                        }
+                    }, 
+                    {
                         text: 'Submit',
+                        iconCls: 'x-fa fas fa-save',
                         handler: 'onLectureClassSubmit',
+                        formBind: true
                     }],
                 },
             ]

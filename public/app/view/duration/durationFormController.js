@@ -7,6 +7,7 @@ Ext.define('TimeTableApp.view.duration.durationFormController', {
     
     onDurationSubmitClicked: async function () {
         let data = this.getViewModel().getData();
+        console.log(data);
         this.saveData(data);
     },
 
@@ -23,7 +24,7 @@ Ext.define('TimeTableApp.view.duration.durationFormController', {
 
     saveData: async function (rawData) {
         let form = this.getView();
-        let data = this.cleanupData(rawData);  
+        let data = rawData;  
         let response = await Ext.Ajax.request({
             url: '/addSsession',
             method: 'post',
@@ -49,7 +50,6 @@ Ext.define('TimeTableApp.view.duration.durationFormController', {
         form.getViewModel().setData({
             from: formattedTime
         });
-        console.log(form.getViewModel());
     },
     onEndTimeSelect: async function (field, value, eOpts) {
         let formattedTime = Ext.Date.format(field.getValue(), 'g:i A');

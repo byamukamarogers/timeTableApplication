@@ -40,7 +40,7 @@ Ext.define('TimeTableApp.view.duration.durationForm', {
                         fieldLabel: 'Length (hours)',
                         xtype: 'numberfield',
                         bind: '{durationLength}',
-                        allowBlank: true,
+                        allowBlank: true
                     },
                     {
                         xtype: 'timefield',

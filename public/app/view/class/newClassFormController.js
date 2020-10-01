@@ -2,6 +2,10 @@ Ext.define('TimeTableApp.view.class.newClassFormController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.class-newclassform',
     onAfterRender: async function () {
+        let data = this.getView().formData;
+        if(data){
+            this.getViewModel().setData(data);
+        }
         this.loadDepartmentcmbo();
         this.loadCourseCmbo();
         this.loadProgramCmbo();
@@ -97,7 +101,7 @@ Ext.define('TimeTableApp.view.class.newClassFormController', {
         if (response.responseText) {
             let result = JSON.parse(response.responseText);
             if (result.status === 'OK') {
-                Ext.Msg.alert('Faculty Of Science TimeTable Application', 'Data has been successfully saved');
+                Ext.Msg.alert('FOS TimeTable Application', 'Data has been successfully saved');
                 let parent = form.up('window');
                 if (parent) {
                     parent.destroy();

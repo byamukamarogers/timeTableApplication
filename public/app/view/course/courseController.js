@@ -20,6 +20,28 @@ Ext.define('TimeTableApp.view.course.courseController', {
             allList.setStore(store);
             store.load();
         }
+    },
+    onEditCourse: async function(){
+        let selection = this.lookupReference("grdallCourses").getSelection()
+        if(selection.length> 0 ){
+            let data = selection[0].data;
+            Ext.create('Ext.window.Window', {
+                title: 'COURSE REGISTRATION FORM',
+                iconCls: 'x-fa fa-edit',
+                width: '80%',
+                bodyPadding: 5,
+                modal: true,
+                items: [
+                    {
+                        header: false,
+                        xtype: 'courseForm',
+                        formData: data
+                    }
+                ]
+            }).show();
+        } else {
+            Ext.Msg.alert('Error', 'Please select a Course unit');
+        }
     }
 
 

@@ -73,20 +73,14 @@ Ext.define('TimeTableApp.view.main.Main', {
             }
         }
     },
-        
+        title: '',
     items: [         
         {
             title: 'Test ABC',
             iconCls: 'x-fa fa-users',
             //xtype: 'testGrid',
             xtype: 'timeTable',
-        }, 
-        {
-            title: 'Testing',
-            iconCls: 'x-fa fa-users',
-            //xtype: 'testGrid',
-            xtype: 'testsView',
-        }, 
+        },
         {
             title: 'Structure',
             iconCls: 'x-fa fa-user',
@@ -133,11 +127,6 @@ Ext.define('TimeTableApp.view.main.Main', {
             title: 'Modules',
             iconCls: 'x-fa fa-user',
             xtype: 'allModules'
-        },
-        {
-            title: 'User View',
-            iconCls: 'x-fa fa-user',
-            xtype:'roomView',
         },
         {
             title: 'Settings',

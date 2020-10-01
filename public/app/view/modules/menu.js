@@ -13,6 +13,7 @@ Ext.define('TimeTableApp.view.modules.Menu', {
         'TimeTableApp.view.faculty.facultyForm',
         'TimeTableApp.view.institution.institutionForm',
         'TimeTableApp.view.class.newClassForm',
+        'TimeTableApp.view.course.courseType'
     ],
     controller: 'main-menu',
     collapsible: true,

@@ -2,9 +2,12 @@ Ext.define('TimeTableApp.view.room.roomFormController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.room-roomform',
     onAfterRender: async function(){
+        let data = this.getView().formData;
+        if(data){
+            this.getViewModel().setData(data);
+        }
         this.loadFacultyNames();
         this.loadRoomTypeNames();
-
     },
     onAddRoomTypeSubmitClicked: async function () {
 
@@ -42,7 +45,6 @@ Ext.define('TimeTableApp.view.room.roomFormController', {
     onRoomSubmitClicked: async function () {
         let data = this.getViewModel().getData();
         this.saveData(data);
-        this.loadAllGridData();
     },
 
     cleanupData: function (rawData) {
@@ -69,7 +71,7 @@ Ext.define('TimeTableApp.view.room.roomFormController', {
         if (response.responseText) {
             let result = JSON.parse(response.responseText);
             if (result.status === 'OK') {
-                Ext.Msg.alert('Faculty Of Science TimeTable Application', 'Data has been successfully saved');
+                Ext.Msg.alert('FOS TimeTable Application', 'Data has been successfully saved');
                 let parent = form.up('window');
                 if (parent) {
                     parent.destroy();

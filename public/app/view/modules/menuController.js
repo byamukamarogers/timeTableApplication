@@ -174,8 +174,9 @@ Ext.define('TimeTableApp.view.modules.MenuController', {
                 root: {
                     expanded: false,
                     children: [
-                        { text: "Add Course", leaf: true, xtype: 'courseForm',},
-                        { text: "View All Courses", leaf: true, xtype: 'courseView', },
+                        { text: "Add Course", leaf: true, xtype: 'courseForm'},
+                        { text: "Course Type", leaf: true, xtype: 'courseTypes'},
+                        { text: "View All Courses", leaf: true, xtype: 'courseView'},
                     ]
                 }
             },

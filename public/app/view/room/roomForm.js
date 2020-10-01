@@ -26,8 +26,7 @@ Ext.define('TimeTableApp.view.room.roomForm',{
                 {
                     xtype: 'tabpanel',
                     activeTab: 0,
-                    items: [
-                        //Room registration form        
+                    items: [     
                         {
                             title: 'Register New Room',
                             bodyPadding: 5,
@@ -41,8 +40,10 @@ Ext.define('TimeTableApp.view.room.roomForm',{
                                 {
                                     fieldLabel: 'Room ID',
                                     bind: '{roomId}',
-                                    allowBlank: false
-                                }, {
+                                    allowBlank: false,
+                                    readOnly: true
+                                }, 
+                                {
                                     fieldLabel: 'Room Name',
                                     bind: '{roomName}',
                                     allowBlank: false

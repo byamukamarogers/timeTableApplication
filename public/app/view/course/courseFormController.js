@@ -2,6 +2,10 @@ Ext.define('TimeTableApp.view.course.courseFormController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.course-courseform',
     onAfterRender: async function(){
+        let data = this.getView().formData;
+        if(data){
+            this.getViewModel().setData(data);
+        }
         this.loadProgramNames();
         this.loadStaffGridData();
         this.loadCourseTypescmbo();

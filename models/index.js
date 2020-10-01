@@ -24,6 +24,7 @@ db.CourseType = sequelize.import('./CourseType').schema('public');
 db.Department.belongsTo(db.Faculty, { foreignKey: 'facultyId' });
 db.Program.belongsTo(db.Department, { foreignKey: 'departmentId' });
 db.Room.belongsTo(db.Faculty, { foreignKey: 'facultyId' });
+db.Room.belongsTo(db.RoomType, { foreignKey: 'roomTypeId' });
 db.Staff.belongsTo(db.Department, { foreignKey: 'departmentId' });
 db.Faculty.belongsTo(db.Institution, { foreignKey: 'institutionId' });
 db.Course.belongsTo(db.Program, { foreignKey: 'programId' });
