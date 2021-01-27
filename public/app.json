@@ -211,14 +211,6 @@
             "path": "resources/TableUtil/tableDrag.js",
             "bundle": true
         }, */
-        {
-            "path": "resources/TableUtil/jquery-3.4.1.min.js",
-            "bundle": true
-        },
-        {
-            "path": "resources/TableUtil/tableDragScript.js",
-            "bundle": true
-        }
     ],
 
     /**
@@ -278,11 +270,6 @@
             "path": "${build.out.css.path}",
             "bundle": true,
             "exclude": ["fashion"]
-        },
-        {
-            // custom drag table css
-            "path": "resources/TableUtil/style.css",
-            "bundle": true
         }
     ],
 

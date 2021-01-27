@@ -22,7 +22,6 @@ Ext.define('TimeTableApp.view.course.courseForm', {
             margin: '3 3 0 0',
             items: [
                 {
-                    extend: 'Ext.form.Panel',
                     xtype: 'form',
                     bodyPadding: 5,
                     width: '50%',
@@ -39,29 +38,34 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                             items: [
                                 {
                                     fieldLabel: 'Course ID',
-                                    bind: '{courseId}',
-                                    readOnly: true
+                                    bind: '{courseid}',
+                                    disabled: true
+                                },
+                                {
+                                    fieldLabel: 'Course ID',
+                                    bind: '{courseid}',
+                                    hidden: true
                                 },
                                 {
                                     fieldLabel: 'Course Name',
-                                    bind: '{courseName}',
+                                    bind: '{coursename}',
                                     allowBlank: false
                                 },
                                 {
                                     fieldLabel: 'Course Code',
-                                    bind: '{courseCode}',
+                                    bind: '{coursecode}',
                                     allowBlank: false
                                 },
                                 {
                                     fieldLabel: 'Credit Units',
                                     xtype: 'numberfield',
-                                    bind: '{creditUnits}',
+                                    bind: '{creditunits}',
                                     allowBlank: true
                                 },
                                 {
                                     xtype: 'combobox',
                                     fieldLabel: 'Year Of Study',
-                                    bind: '{studyYear}',
+                                    bind: '{studyyear}',
                                     displayField: 'name',
                                     valueField: 'id',
                                     forceSelection: true,
@@ -81,15 +85,16 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                     fieldLabel: 'is Electable',
                                     columns: 2,
                                     vertical: true,
+                                    allowBlank: true,
                                     items: [
-                                        { boxLabel: 'YES', name: 'isElectable', inputValue: 'YES' },
-                                        { boxLabel: 'NO', name: 'isElectable', inputValue: 'NO' },
+                                        { boxLabel: 'YES', name: 'iselectable', inputValue: 'YES' },
+                                        { boxLabel: 'NO', name: 'iselectable', inputValue: 'NO' },
                                     ]
                                 },
                                 {
                                     xtype: 'combobox',
                                     fieldLabel: 'Semester Of Study',
-                                    bind: '{studySemester}',
+                                    bind: '{studysemester}',
                                     displayField: 'name',
                                     valueField: 'id',
                                     forceSelection: true,
@@ -104,14 +109,15 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                 {
                                     fieldLabel: 'Course Type',
                                     xtype: 'combobox',
-                                    bind: '{courseTypeId}',
+                                    bind: '{coursetypeid}',
                                     allowBlank: false,
                                     reference: 'cmboCourseTypes',
-                                    displayField: 'courseTypeName',
-                                    valueField: 'courseTypeId',
-                                    forceSelection: true
-                                },
-                            ],
+                                    displayField: 'coursetypename',
+                                    valueField: 'coursetypeid',
+                                    forceSelection: true,
+                                    allowBlank: false
+                                }
+                            ]
                         },
                         {
                             margin: '0 5 0 10',
@@ -126,20 +132,20 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                 {
                                     xtype: 'combobox',
                                     reference: 'cboProgramName',
-                                    bind: '{programId}',
+                                    bind: '{programid}',
                                     fieldLabel: 'Program Name',
-                                    displayField: 'programName',
-                                    valueField: 'programId',
+                                    displayField: 'programname',
+                                    valueField: 'programid',
                                     forceSelection: true,
                                     editable: false
                                 },
                                 {
                                     xtype: 'combobox',
                                     reference: 'cmboStaffList',
-                                    bind: '{staffId}',
+                                    bind: '{staffid}',
                                     fieldLabel: 'Select Lecturer',
                                     displayField: 'name',
-                                    valueField: 'staffId',
+                                    valueField: 'staffid',
                                     forceSelection: true,
                                     editable: false
                                 },
@@ -147,7 +153,7 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                     xtype: 'numberfield',
                                     fieldLabel: 'No. of Lectures Per week',
                                     allowBlank: false,
-                                    bind: '{numberOfLecturesPerWeek}',
+                                    bind: '{numberoflecturesperweek}',
                                     minValue: 1
                                 },
                                 {
@@ -155,7 +161,7 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                     fieldLabel: 'Duration Per Lecture',
                                     decimalPrecision: 2,
                                     allowBlank: false,
-                                    bind: '{durationPerLecture}',
+                                    bind: '{durationperlecture}',
                                     displayField: 'name',
                                     valueField: 'id',
                                     forceSelection: true,
@@ -175,12 +181,11 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                                     xtype: 'numberfield',
                                     fieldLabel: 'Maximum No. of Lectures Per Day',
                                     allowBlank: false,
-                                    bind: '{maxNumberOfLecturesPerDay}',
+                                    bind: '{maximumnumberoflecturesperday}',
                                     minValue: 1
                                 }
-                            ],
-
-                        },
+                            ]
+                        }
                     ],
                     buttons: [
                         {
@@ -195,9 +200,9 @@ Ext.define('TimeTableApp.view.course.courseForm', {
                             formBind: true,
                             handler: 'onCourseUnitSubmitClicked'
                         }
-                    ],
-                },
+                    ]
+                }
             ]
-        },
+        }
     ]
 });

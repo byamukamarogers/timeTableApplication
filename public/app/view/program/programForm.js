@@ -1,5 +1,5 @@
 
-Ext.define('TimeTableApp.view.program.programForm',{
+Ext.define('TimeTableApp.view.program.programForm', {
     extend: 'Ext.panel.Panel',
     xtype: 'programForm',
 
@@ -12,15 +12,16 @@ Ext.define('TimeTableApp.view.program.programForm',{
     viewModel: {
         type: 'program-programform'
     },
-    listeners:{afterrender:'onAfterRender'},
+    listeners: { afterrender: 'onAfterRender' },
     items: [
         {
             xtype: 'container',
             layout: 'hbox',
             margin: 3,
-            items: [     
+            items: [
                 {
                     title: 'Add New Program',
+                    xtype: 'form',
                     bodyPadding: 5,
                     width: '50%',
                     layout: 'anchor',
@@ -28,47 +29,58 @@ Ext.define('TimeTableApp.view.program.programForm',{
                         anchor: '100%'
                     },
                     defaultType: 'textfield',
-                    items: [{
-                        fieldLabel: 'Program Id',
-                        bind: '{programId}',
-                        allowBlank: true,
-                        readOnly: true
-                    }, {
-                        fieldLabel: 'Program Name',
-                        bind: '{programName}',
-                        allowBlank: false
-                    }, {
-                        fieldLabel: 'Program Code',
-                        bind: '{programCode}',
-                        allowBlank: false
-                    }, 
-                    {
-                        fieldLabel: 'Duration',
-                        xtype:'numberfield',
-                        bind: '{duration}',
-                        allowBlank: false
-                    },
-                    {
-                        xtype: 'combobox',
-                        reference: 'cboDepartmentName',
-                        bind: '{departmentId}',
-                        fieldLabel: 'Department Name',
-                        displayField: 'departmentName',
-                        valueField: 'departmentId',
-                        forceSelection: true,
-                        queryMode: 'local'
-                    }
+                    items: [
+                        {
+                            fieldLabel: 'Program Id',
+                            bind: '{programid}',
+                            hidden: true
+                        },
+                        {
+                            fieldLabel: 'Program Id',
+                            bind: '{programid}',
+                            disabled: true
+                        },
+                        {
+                            fieldLabel: 'Program Name',
+                            bind: '{programname}',
+                            allowBlank: false
+                        }, 
+                        {
+                            fieldLabel: 'Program Code',
+                            bind: '{programcode}',
+                            allowBlank: false
+                        },
+                        {
+                            fieldLabel: 'Duration',
+                            xtype: 'numberfield',
+                            bind: '{duration}',
+                            allowBlank: false
+                        },
+                        {
+                            xtype: 'combobox',
+                            reference: 'cboDepartmentName',
+                            bind: '{departmentid}',
+                            fieldLabel: 'Department Name',
+                            displayField: 'departmentname',
+                            valueField: 'departmentid',
+                            forceSelection: true,
+                            queryMode: 'local',
+                            allowBlank: false
+                        }
 
                     ],
-                    buttons: [{
-                        text: 'Reset'
-                    }, {
-                        text: 'Submit',
-                        handler: 'onProgramSubmitClicked'
-                    }],
-                },
-                
-            ],
+                    buttons: [
+                        {
+                            text: 'Reset'
+                        },
+                        {
+                            text: 'Submit',
+                            formBind: true,
+                            handler: 'onProgramSubmitClicked'
+                        }
+                    ]
+                }
+            ]
         }
     ]
 });

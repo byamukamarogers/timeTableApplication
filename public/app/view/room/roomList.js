@@ -51,13 +51,13 @@ Ext.define('TimeTableApp.view.room.roomList', {
                             columns: [
                                 {
                                     text: 'Room Id',
-                                    dataIndex: 'roomId',
+                                    dataIndex: 'roomid',
                                     flex: 0.2,
                                     hidden: true
                                 },
                                 {
                                     text: 'Room Name',
-                                    dataIndex: 'roomName',
+                                    dataIndex: 'roomname',
                                     flex: 0.3
                                 },
                                 {
@@ -67,11 +67,8 @@ Ext.define('TimeTableApp.view.room.roomList', {
                                 },
                                 {
                                     text: 'Room Type',
-                                    dataIndex: 'roomTypeId',
-                                    flex: 0.2,
-                                    renderer: function(value, metaData, record){
-                                        return record.data.RoomType.roomTypeName;
-                                    }
+                                    dataIndex: 'roomtypename',
+                                    flex: 0.2
                                 },
                                 {
                                     text: 'Location',
@@ -90,7 +87,7 @@ Ext.define('TimeTableApp.view.room.roomList', {
                                     ptype: 'rowexpander',
                                     rowBodyTpl: [
                                         '<b>Location :</b> {location}<br/>',
-                                        '<b>Faculty :</b> {Faculty.facultyName}'
+                                        '<b>Faculty :</b> {facultyname}'
                                     ]
                                 }
                             ]

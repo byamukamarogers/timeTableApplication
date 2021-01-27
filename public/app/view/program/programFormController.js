@@ -6,17 +6,20 @@ Ext.define('TimeTableApp.view.program.programFormController', {
     },
     loadDepartmentNames: async function () {
         let combo = this.lookupReference('cboDepartmentName');
-        let response = await Ext.Ajax.request({ url: '/departments', method: 'get' });
+        let response = await Ext.Ajax.request({ url: 'resources/routes/department/list.php', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            let store = Ext.create('Ext.data.Store', { data: records });
+            let store = Ext.create('Ext.data.Store', { data: records.data });
             combo.setStore(store);
             store.load();
         }
     },
     onProgramSubmitClicked: async function () {
-        let data = this.getViewModel().getData();
-        this.saveData(data);
+        let data = this.cleanupData(this.getViewModel().getData());
+        let record = {};
+        record.data = data;
+        console.log(record);
+        this.saveData(record);
     },
 
     cleanupData: function (rawData) {
@@ -32,9 +35,9 @@ Ext.define('TimeTableApp.view.program.programFormController', {
 
     saveData: async function (rawData) {
         let form = this.getView();
-        let data = this.cleanupData(rawData);  
+        let data = rawData;  
         let response = await Ext.Ajax.request({
-            url: '/addProgram',
+            url: 'resources/routes/program/create.php',
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             params: JSON.stringify(data)

@@ -1,7 +1,7 @@
 
-Ext.define('TimeTableApp.view.institution.institutionForm',{
+Ext.define('TimeTableApp.view.institution.institutionForm', {
     extend: 'Ext.panel.Panel',
-    xtype:'institutionForm',
+    xtype: 'institutionForm',
 
     requires: [
         'TimeTableApp.view.institution.institutionFormController',
@@ -12,62 +12,74 @@ Ext.define('TimeTableApp.view.institution.institutionForm',{
     viewModel: {
         type: 'institution-institutionform'
     },
-    listeners: {afterrender:'onAfterRender'},
+    listeners: { afterrender: 'onAfterRender' },
     items: [
         {
             xtype: 'container',
             layout: 'hbox',
             margin: 5,
-            items: [     
+            items: [
                 {
                     title: 'ADD UNIVERSITY OR INSTITUTION',
                     bodyPadding: 5,
+                    xtype: 'form',
                     width: '50%',
                     layout: 'anchor',
                     defaults: {
                         anchor: '100%'
                     },
                     defaultType: 'textfield',
-                    items: [{
-                        fieldLabel: 'Institution Id',
-                        name: 'institutionid',
-                        bind: '{institutionId}',
-                        allowBlank: false,
-                    }, {
-                        fieldLabel: 'Institution Name',
-                        name: 'institutionname',
-                        bind: '{InstitutionName}',
-                        allowBlank: false
-                    },
-                    {
-                        fieldLabel: 'Address',
-                        name: 'address',
-                        bind: '{address}',
-                        allowBlank: false
-                    }, 
-                    {
-                        fieldLabel: 'Phone Contact',
-                        name: 'phonecontact',
-                        bind: '{phoneContact}',
-                        allowBlank: false
-                    },
-                    {
-                        fieldLabel: 'Email',
-                        name: 'email',
-                        bind: '{email}',
-                        allowBlank: false
-                    }
-
+                    items: [
+                        {
+                            fieldLabel: 'Institution Id',
+                            name: 'institutionid',
+                            bind: '{institutionid}',
+                            readOnly: true,
+                            hidden:true
+                        },
+                        {
+                            fieldLabel: 'Institution Id',
+                            name: 'institutionid',
+                            bind: '{institutionid}',
+                            disabled: true
+                        },
+                        {
+                            fieldLabel: 'Institution Name',
+                            name: 'institutionname',
+                            bind: '{institutionname}',
+                            allowBlank: false
+                        },
+                        {
+                            fieldLabel: 'Address',
+                            name: 'address',
+                            bind: '{address}',
+                            allowBlank: false
+                        },
+                        {
+                            fieldLabel: 'Phone Contact',
+                            name: 'phonecontact',
+                            bind: '{phonecontact}',
+                            allowBlank: false
+                        },
+                        {
+                            fieldLabel: 'Email',
+                            name: 'email',
+                            bind: '{email}',
+                            allowBlank: false
+                        }
                     ],
-                    buttons: [{
-                        text: 'Reset'
-                    }, {
-                        text: 'Submit',
-                        handler: 'onInstitutionSubmitClicked'
-                    }],
-                },
-                
-            ],
+                    buttons: [
+                        {
+                            text: 'Reset'
+                        },
+                        {
+                            text: 'Submit',
+                            formBind: true,
+                            handler: 'onInstitutionSubmitClicked'
+                        }
+                    ]
+                }
+            ]
         }
     ]
 });

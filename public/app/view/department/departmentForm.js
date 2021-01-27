@@ -1,5 +1,5 @@
 
-Ext.define('TimeTableApp.view.department.departmentForm',{
+Ext.define('TimeTableApp.view.department.departmentForm', {
     extend: 'Ext.panel.Panel',
     xtype: 'departmentForm',
 
@@ -23,48 +23,59 @@ Ext.define('TimeTableApp.view.department.departmentForm',{
                     title: 'Add New Department',
                     bodyPadding: 2,
                     width: '50%',
+                    xtype: 'form',
                     layout: 'anchor',
                     defaults: {
                         anchor: '100%'
                     },
                     defaultType: 'textfield',
-                    items: [{
-                        fieldLabel: 'Department Id',
-                        bind: '{departmentId}',
-                        allowBlank: false,
-                        readOnly: true
-                    }, {
-                        fieldLabel: 'Department Name',
-                        bind: '{departmentName}',
-                        allowBlank: false
-                    },
-                    {
-                        fieldLabel: 'Department Code',
-                        bind: '{departmentCode}',
-                        allowBlank: false
-                    },
-                    {
-                        xtype: 'combobox',
-                        reference: 'cboFacultyName',
-                        bind: '{facultyId}',
-                        fieldLabel: 'Faculty Name',
-                        displayField: 'facultyName',
-                        valueField: 'facultyId',
-                        forceSelection: true,
-                        queryMode: 'local'
-                    }
+                    items: [
+                        {
+                            fieldLabel: 'Department Id',
+                            bind: '{departmentid}',
+                            disabled: true
+                        },
+                        {
+                            fieldLabel: 'Department Id',
+                            bind: '{departmentid}',
+                            hidden: true
+                        },
+                        {
+                            fieldLabel: 'Department Name',
+                            bind: '{departmentname}',
+                            allowBlank: false
+                        },
+                        {
+                            fieldLabel: 'Department Code',
+                            bind: '{departmentcode}',
+                            allowBlank: false
+                        },
+                        {
+                            xtype: 'combobox',
+                            reference: 'cboFacultyName',
+                            bind: '{facultyid}',
+                            fieldLabel: 'Faculty Name',
+                            displayField: 'facultyname',
+                            valueField: 'facultyid',
+                            forceSelection: true,
+                            queryMode: 'local',
+                            allowBlank: false
+                        }
 
                     ],
-                    buttons: [{
-                        text: 'Reset'
-                    }, {
-                        text: 'Submit',
-                        iconCls: 'x-fa fas fa-save',
-                        handler: 'onDepartmentSubmitClicked'
-                    }],
-                },
-                
-            ],
+                    buttons: [
+                        {
+                            text: 'Reset'
+                        },
+                        {
+                            text: 'Submit',
+                            formBind: true,
+                            iconCls: 'x-fa fas fa-save',
+                            handler: 'onDepartmentSubmitClicked'
+                        }
+                    ]
+                }
+            ]
         }
     ]
 });

@@ -13,52 +13,40 @@ Ext.define('TimeTableApp.view.class.newClassFormController', {
     },
     loadCourseCmbo: async function () {
         let allList = this.lookupReference('cmboCourse');
-        let response = await Ext.Ajax.request({ url: '/courseunits', method: 'get' });
+        let response = await Ext.Ajax.request({ url: 'resources/routes/course/list.php', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            let store = Ext.create('Ext.data.Store', { data: records });
+            let store = Ext.create('Ext.data.Store', { data: records.data });
             allList.setStore(store);
             store.load();
         }
     },
     loadProgramCmbo: async function () {
         let allList = this.lookupReference('cmboPrograms');
-        let response = await Ext.Ajax.request({ url: '/programs', method: 'get' });
+        let response = await Ext.Ajax.request({ url: 'resources/routes/program/list.php', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            var cleanRecords = [];
-            for(var i = 0; i < records.length; i++){
-                var singleRecord = records[i];
-                singleRecord["departmentName"] = singleRecord.Department.departmentName;
-                delete singleRecord.Department;
-                cleanRecords.push(singleRecord);
-            }
-            let store = Ext.create('Ext.data.Store', { data: cleanRecords });
+            let store = Ext.create('Ext.data.Store', { data: records.data });
             allList.setStore(store);
             store.load();
         }
     },
     loadDepartmentcmbo: async function () {
         let allList = this.lookupReference('comboDepartments');
-        let response = await Ext.Ajax.request({ url: '/departments', method: 'get' });
+        let response = await Ext.Ajax.request({ url: 'resources/routes/department/list.php', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            var cleanRecords = [];
-            for (var i = 0; i < records.length; i++) {
-                var singleRecord = records[i];
-                singleRecord["facultyName"] = singleRecord.Faculty.facultyName;
-                delete singleRecord.Faculty;
-                cleanRecords.push(singleRecord);
-            }
-            let store = Ext.create('Ext.data.Store', { data: cleanRecords });
+            let store = Ext.create('Ext.data.Store', { data: records.data });
             allList.setStore(store);
             store.load();
         }
     },
     onIsProgramSelect: async function (combo, record, eOpts) {
         if (combo.rawValue === 'Yes') {
+            Ext.getCmp('isCourseOpt').setValue(0);
             Ext.getCmp('isCourseOpt').setHidden('true');
             Ext.getCmp('courseIdSelect').setHidden('true');
+            Ext.getCmp('courseIdSelect').setValue(0);
         }
 
     },
@@ -72,8 +60,10 @@ Ext.define('TimeTableApp.view.class.newClassFormController', {
         }
     },
     onLectureClassSubmit: async function () {
-        let data = this.getViewModel().getData();
-        this.saveData(data);
+        let data = this.cleanupData(this.getViewModel().getData());
+        let record = {};
+        record.data = data;
+        this.saveData(record);
     },
 
     cleanupData: function (rawData) {
@@ -89,10 +79,9 @@ Ext.define('TimeTableApp.view.class.newClassFormController', {
 
     saveData: async function (rawData) {
         let form = this.getView();
-        console.log(rawData);
-        let data = this.cleanupData(rawData);  
+        let data = rawData;  
         let response = await Ext.Ajax.request({
-            url: '/addLectureClass',
+            url: 'resources/routes/class/create.php',
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             params: JSON.stringify(data)
@@ -101,7 +90,7 @@ Ext.define('TimeTableApp.view.class.newClassFormController', {
         if (response.responseText) {
             let result = JSON.parse(response.responseText);
             if (result.status === 'OK') {
-                Ext.Msg.alert('FOS TimeTable Application', 'Data has been successfully saved');
+                Ext.Msg.alert('TimeTable Application', 'Data has been successfully saved');
                 let parent = form.up('window');
                 if (parent) {
                     parent.destroy();

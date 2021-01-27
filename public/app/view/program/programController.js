@@ -3,21 +3,21 @@ Ext.define('TimeTableApp.view.program.programController', {
     alias: 'controller.program-program',
     onGridSearch: async function(field, e){
         var val = field.getValue();
-        let allList = this.lookupReference('grdallPrograms');
-        let response = await Ext.Ajax.request({ url: '/programs/'+val, method: 'get' });
-        if (response.responseText) {
-            let records = JSON.parse(response.responseText);
-            var cleanRecords = [];
-            for(var i = 0; i < records.length; i++){
-                var singleRecord = records[i];
-                singleRecord["departmentName"] = singleRecord.Department.departmentName;
-                delete singleRecord.Department;
-                cleanRecords.push(singleRecord);
+        let allList = this.lookupReference('grdallPrograms').getStore();
+        allList.filter([
+            {
+                property : 'programname',
+                value    : val
+            },
+            {
+                property : 'duration',
+                value    : val
+            },
+            {
+                property : 'departmentname',
+                value    : val
             }
-            let store = Ext.create('Ext.data.Store', { data: cleanRecords });
-            allList.setStore(store);
-            store.load();
-        }
+        ]);
 
     },
     onAfterRender: async function(){
@@ -26,17 +26,10 @@ Ext.define('TimeTableApp.view.program.programController', {
 
     loadAllGridData: async function () {
         let allList = this.lookupReference('grdallPrograms');
-        let response = await Ext.Ajax.request({ url: '/programs', method: 'get' });
+        let response = await Ext.Ajax.request({ url: 'resources/routes/program/list.php', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            var cleanRecords = [];
-            for(var i = 0; i < records.length; i++){
-                var singleRecord = records[i];
-                singleRecord["departmentName"] = singleRecord.Department.departmentName;
-                delete singleRecord.Department;
-                cleanRecords.push(singleRecord);
-            }
-            let store = Ext.create('Ext.data.Store', { data: cleanRecords });
+            let store = Ext.create('Ext.data.Store', { data: records.data });
             allList.setStore(store);
             store.load();
         }

@@ -12,6 +12,7 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
         type: 'class-newclassform'
     },
     listeners: { afterrender: 'onAfterRender' },
+    title: 'CREATE NEW CLASS',
     items: [
         {
             xtype: 'container',
@@ -36,24 +37,29 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                             items: [
                                 {
                                     fieldLabel: 'Class ID',
-                                    bind: '{classId}',
-                                    readOnly: true
+                                    bind: '{classid}',
+                                    hidden: true
+                                },
+                                {
+                                    fieldLabel: 'Class ID',
+                                    bind: '{classid}',
+                                    disabled: true
                                 },
                                 {
                                     fieldLabel: 'Class Name',
                                     allowBlank: false,
-                                    bind: '{className}',
+                                    bind: '{classname}',
                                 },
                                 {
                                     xtype: 'combobox',
                                     fieldLabel: 'is Program',
                                     displayField: 'name',
-                                    bind: '{isProgram}',
+                                    bind: '{isprogram}',
                                     valueField: 'id',
                                     store: {
                                         data: [
-                                            { id: 'true', name: 'Yes' },
-                                            { id: 'false', name: 'No' },
+                                            { id: 1, name: 'Yes' },
+                                            { id: 0, name: 'No' },
                                         ]
                                     },
                                     listeners: { select: 'onIsProgramSelect' }
@@ -63,9 +69,9 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                     fieldLabel: 'Choose Program',
                                     id: 'programIdSelect',
                                     hidden: false,
-                                    displayField: 'programName',
-                                    bind: '{programId}',
-                                    valueField: 'programId',
+                                    displayField: 'programname',
+                                    bind: '{programid}',
+                                    valueField: 'programid',
                                     reference: 'cmboPrograms',
                                     forceSelection: true
                                 },
@@ -75,25 +81,25 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                     xtype: 'combobox',
                                     fieldLabel: 'is Course',
                                     displayField: 'name',
-                                    bind: '{isCourse}',
+                                    bind: '{iscourse}',
                                     valueField: 'id',
                                     store: {
                                         data: [
-                                            { id: 'true', name: 'Yes' },
-                                            { id: 'false', name: 'No' },
+                                            { id: 1, name: 'Yes' },
+                                            { id: 0, name: 'No' },
                                         ]
-                                    }
+                                    }                                    
                                 },
                                 {
                                     xtype: 'combobox',
                                     fieldLabel: 'Choose Course',
                                     id: 'courseIdSelect',
                                     hidden: false,
-                                    displayField: 'courseName',
-                                    bind: '{courseId}',
-                                    valueField: 'courseId',
+                                    displayField: 'coursename',
+                                    bind: '{courseid}',
+                                    valueField: 'courseid',
                                     reference: 'cmboCourse',
-                                    forceSelection: true,
+                                    forceSelection: true
                                 }
                             ]
                         },
@@ -118,18 +124,19 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                             { id: '1', name: 'ONE' },
                                             { id: '2', name: 'TWO' },
                                         ]
-                                    }
+                                    },
+                                    allowBlank:false
                                 },
                                 {
                                     fieldLabel: 'No of Students',
                                     xtype: 'numberfield',
-                                    bind: '{totalStudents}',
+                                    bind: '{totalstudents}',
                                     allowBlank: false,
                                 },
                                 {
                                     fieldLabel: 'Classes Start At',
                                     xtype: 'timefield',
-                                    bind: '{startAt}',
+                                    bind: '{startat}',
                                     allowBlank: false,
                                     name: 'in',
                                     minValue: '6:00 AM',
@@ -140,7 +147,7 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                 {
                                     fieldLabel: 'End At',
                                     xtype: 'timefield',
-                                    bind: '{endAt}',
+                                    bind: '{endat}',
                                     allowBlank: false,
                                     name: 'in',
                                     minValue: '6:00 AM',
@@ -151,9 +158,9 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                 {
                                     xtype: 'combobox',
                                     fieldLabel: 'Department',
-                                    displayField: 'departmentName',
-                                    bind: '{departmentId}',
-                                    valueField: 'departmentId',
+                                    displayField: 'departmentname',
+                                    bind: '{departmentid}',
+                                    valueField: 'departmentid',
                                     reference: 'comboDepartments',
                                     forceSelection: true,
                                     allowBlank: false,
@@ -163,7 +170,7 @@ Ext.define('TimeTableApp.view.class.newClassForm', {
                                     fieldLabel: 'Created By',
                                     allowBlank: false,
                                     hidden:true,
-                                    bind: '{createdBy}',
+                                    bind: '{createdby}',
                                     value: 1
                                 }
                             ]

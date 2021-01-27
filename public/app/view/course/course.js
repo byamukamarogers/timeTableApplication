@@ -28,7 +28,6 @@ Ext.define('TimeTableApp.view.course.course', {
                     },
                     items: [
                         {
-                            extend: 'Ext.grid.Panel',
                             xtype: 'grid',
                             title: 'All Courses',
                             reference: 'grdallCourses',
@@ -59,32 +58,33 @@ Ext.define('TimeTableApp.view.course.course', {
                             columns: [
                                 {
                                     text: 'Course Id',
-                                    dataIndex: 'courseId',
+                                    dataIndex: 'courseid',
                                     hidden: true
                                 },
                                 {
                                     text: 'Course Code',
-                                    dataIndex: 'courseCode',
+                                    dataIndex: 'coursecode',
                                     flex: 0.15
                                 },
                                 {
                                     text: 'Course Name',
-                                    dataIndex: 'courseName',
-                                    flex: 0.35
+                                    dataIndex: 'coursename',
+                                    flex: 0.3
                                 },
                                 {
                                     text: 'Credit Units',
-                                    dataIndex: 'creditUnits',
-                                    flex: 0.1
+                                    dataIndex: 'creditunits',
+                                    flex: 0.12
                                 },
                                 {
                                     text: 'Course Type',
-                                    dataIndex: 'courseTypeId',
-                                    flex: 0.2
+                                    dataIndex: 'coursetypename',
+                                    flex: 0.15
                                 },
                                 {
                                     text: 'Lecturer',
-                                    dataIndex: 'staffId',
+                                    xtype:'templatecolumn',
+                                    tpl:'{name} ({initial})',
                                     flex: 0.2
                                 }
                             ],
@@ -98,7 +98,7 @@ Ext.define('TimeTableApp.view.course.course', {
                                 {
                                     ptype: 'rowexpander',
                                     rowBodyTpl: [
-                                        '<b>Program :</b> {Program.programName}'
+                                        '<b>Program :</b> {programname}'
                                     ]
                                 }
                             ]

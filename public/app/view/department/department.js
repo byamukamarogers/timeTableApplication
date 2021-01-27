@@ -18,7 +18,7 @@ Ext.define('TimeTableApp.view.department.department', {
             layout: 'hbox',
             margin: 3,
             items: [
-                           //Grid to display all Programs
+                //Grid to display all Programs
                 {
                     bodyPadding: 0,
                     width: '100%',
@@ -41,27 +41,12 @@ Ext.define('TimeTableApp.view.department.department', {
                                 tooltip: 'Edit'
                             }
                         },
-                        items:[{
-                            docked:'top',
-                            xtype:'toolbar',
-                            items:[{
-                                text: 'Search Box',
-                            }]
-                        }],
                         columns: [
-                            { text: 'Department id', dataIndex: 'departmentId',  },
-                            { text: 'Department Code', dataIndex: 'departmentCode', },
-                            { text: 'Department Name', dataIndex: 'departmentName', flex: 1 },
-                            { text: 'Faculty', dataIndex: 'facultyName', flex: 1},
-                            {
-                                width: 70,
-                                sortable: false,
-                                menuDisabled: true,
-                                xtype: 'actioncolumn',
-                                items: ['@delete', '@edit']
-                            }
+                            { text: 'Department id', dataIndex: 'departmentid', flex: 0.15 },
+                            { text: 'Department Code', dataIndex: 'departmentcode', flex: 0.15 },
+                            { text: 'Department Name', dataIndex: 'departmentname', flex: 0.3 },
+                            { text: 'Faculty', dataIndex: 'facultyname', flex: 0.3 }
                         ],
-                        //Add Pagination toolbar, Paging not working yet, this just sample
                         bbar: {
                             xtype: 'pagingtoolbar',
                             displayInfo: true,
@@ -84,14 +69,11 @@ Ext.define('TimeTableApp.view.department.department', {
                                 text: 'Refresh',
                                 iconCls: 'x-fa fa-refresh blue'
                             }
-                        ],
-
-
+                        ]
                     }
-                    ],
-
+                    ]
                 }
-            ],
+            ]
         }
     ]
 });

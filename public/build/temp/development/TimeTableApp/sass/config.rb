@@ -1,1 +1,1 @@
-cache_path = 'C:\Users\Pc\Desktop\FP\TIMETABLE\public/build/.sass-cache'
+cache_path = 'D:\xampp\htdocs\TimeTable/build/.sass-cache'

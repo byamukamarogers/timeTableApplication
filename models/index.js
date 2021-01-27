@@ -29,13 +29,15 @@ db.Staff.belongsTo(db.Department, { foreignKey: 'departmentId' });
 db.Faculty.belongsTo(db.Institution, { foreignKey: 'institutionId' });
 db.Course.belongsTo(db.Program, { foreignKey: 'programId' });
 db.Course.belongsTo(db.CourseType, { foreignKey: 'courseTypeId' });
+db.Course.belongsTo(db.Staff, { foreignKey: 'staffId', sourceKey: 'staffId' });
 
 /* TimeTable Relations */
-db.TimeTable.hasOne(db.Day, {foreignKey: 'dayId'});
-db.TimeTable.belongsTo(db.Ssession, {foreignKey: 'ssessionId'});
-db.TimeTable.belongsTo(db.Course, {foreignKey: 'courseId'});
-db.TimeTable.belongsTo(db.Staff, {foreignKey: 'staffId'});
-db.TimeTable.hasOne(db.Room, {foreignKey: 'roomId'});
+db.TimeTable.hasOne(db.Day, { foreignKey: 'dayId', sourceKey: 'dayId' });
+db.Day.hasMany(db.TimeTable, { foreignKey: 'dayId', sourceKey: 'dayId' });
+db.TimeTable.belongsTo(db.Ssession, { foreignKey: 'ssessionId' });
+db.TimeTable.belongsTo(db.Course, { foreignKey: 'courseId' });
+db.TimeTable.belongsTo(db.Staff, { foreignKey: 'staffId' });
+db.TimeTable.hasOne(db.Room, { foreignKey: 'roomId', sourceKey: 'roomId' });
 /* TimeTable Relations */
 
 /* sequelize.sync({ force: true })

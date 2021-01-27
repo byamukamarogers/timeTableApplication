@@ -38,13 +38,13 @@ Ext.define('TimeTableApp.view.class.newClass', {
             columns: [
                 {
                     text: 'Class Id',
-                    dataIndex: 'classId',
+                    dataIndex: 'classid',
                     flex: 0.5,
                     hidden: true
                 },
                 {
                     text: 'Class Name',
-                    dataIndex: 'className',
+                    dataIndex: 'classname',
                     flex: 0.3
                 },
                 {
@@ -54,17 +54,17 @@ Ext.define('TimeTableApp.view.class.newClass', {
                 },
                 {
                     text: 'No of Students',
-                    dataIndex: 'totalStudents',
+                    dataIndex: 'totalstudents',
                     flex: 0.2
                 },
                 {
                     text: 'is Program',
-                    dataIndex: 'isProgram',
+                    dataIndex: 'isprogram',
                     flex: 0.2
                 },
                 {
                     text: 'Created By',
-                    dataIndex: 'createdBy',
+                    dataIndex: 'createdby',
                     flex: 0.2,
                     hidden:true
                 }
@@ -79,11 +79,11 @@ Ext.define('TimeTableApp.view.class.newClass', {
                 {
                     ptype: 'rowexpander',
                     rowBodyTpl: [
-                        '<b>Registered By :</b> {createdBy}<br/>',
-                        '<b>Is Program :</b> {isProgram}<br/>',
-                        '<b>Program :</b> {programId}<br/>',
-                        '<b>Is Course :</b> {isCourse}<br/>',
-                        '<b>Course :</b> {courseId}<br/>',
+                        '<b>Registered By :</b> {createdby}<br/>',
+                        '<b>Is Program :</b> {isprogram}<br/>',
+                        '<b>Program :</b> {programname}<br/>',
+                        '<b>Is Course :</b> {iscourse}<br/>',
+                        '<b>Course :</b> {coursename}<br/>',
                     ]
                 }
             ]

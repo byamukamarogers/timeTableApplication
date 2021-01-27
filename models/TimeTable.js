@@ -36,6 +36,10 @@ module.exports = function (sequelize, DataTypes) {
             field: 'roomid',
             allowNull: false,
         },
+        tableAddress: {
+            type: DataTypes.INTEGER,
+            field: 'rowcoladdress'
+        },
     }, {
         tableName: 'timetable',
         underscored: true,

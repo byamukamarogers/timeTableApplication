@@ -2,13 +2,17 @@ Ext.define('TimeTableApp.view.duration.durationFormController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.duration-durationform',
     onAfterRender: async function(){
-
+        let data = this.getView().formData;
+        if(data){
+            this.getViewModel().setData(data)
+        }
     },
     
     onDurationSubmitClicked: async function () {
-        let data = this.getViewModel().getData();
-        console.log(data);
-        this.saveData(data);
+        let data = this.cleanupData(this.getViewModel().getData());
+        let record = {};
+        record.data = data;
+        this.saveData(record);
     },
 
     cleanupData: function (rawData) {
@@ -26,7 +30,7 @@ Ext.define('TimeTableApp.view.duration.durationFormController', {
         let form = this.getView();
         let data = rawData;  
         let response = await Ext.Ajax.request({
-            url: '/addSsession',
+            url: 'resources/routes/session/create.php',
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             params: JSON.stringify(data)
@@ -35,28 +39,13 @@ Ext.define('TimeTableApp.view.duration.durationFormController', {
         if (response.responseText) {
             let result = JSON.parse(response.responseText);
             if (result.status === 'OK') {
-                Ext.Msg.alert('Faculty Of Science TimeTable Application', 'Data has been successfully saved',);
+                Ext.Msg.alert('TimeTable Application', 'Data successfully saved',);
                 let parent = form.up('window');
                 if (parent) {
                     parent.destroy();
                 }
             }
         }
-    },    
-    onStartTimeSelect: async function (field, value, eOpts) {
-        let formattedTime = Ext.Date.format(field.getValue(), 'g:i A');
-        console.log(value.data.disp);
-        let form = Ext.getCmp('durationForm');
-        form.getViewModel().setData({
-            from: formattedTime
-        });
-    },
-    onEndTimeSelect: async function (field, value, eOpts) {
-        let formattedTime = Ext.Date.format(field.getValue(), 'g:i A');
-        let form = Ext.getCmp('durationForm');
-        form.getViewModel().setData({
-            to: formattedTime
-        });
-    },
+    }
 
 });

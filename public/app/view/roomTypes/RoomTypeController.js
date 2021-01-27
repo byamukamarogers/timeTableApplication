@@ -6,8 +6,10 @@ Ext.define('TimeTableApp.view.roomTypes.RoomTypeController', {
     },
 
     onRoomTypeSubmitClicked: async function () {
-        let data = this.getViewModel().getData();
-        this.saveData(data);
+        let data = this.cleanupData(this.getViewModel().getData());
+        let record = {};
+        record.data = data;
+        this.saveData(record);
     },
 
     cleanupData: function (rawData) {
@@ -23,9 +25,9 @@ Ext.define('TimeTableApp.view.roomTypes.RoomTypeController', {
 
     saveData: async function (rawData) {
         let form = this.getView();
-        let data = this.cleanupData(rawData);  
+        let data = rawData;  
         let response = await Ext.Ajax.request({
-            url: '/addRoomType',
+            url: 'resources/routes/roomtype/create.php',
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             params: JSON.stringify(data)
@@ -45,10 +47,10 @@ Ext.define('TimeTableApp.view.roomTypes.RoomTypeController', {
     },
     loadAllGridData: async function () {
         let allList = this.lookupReference('grdallRoomTypes');
-        let response = await Ext.Ajax.request({ url: '/roomtypes', method: 'get' });
+        let response = await Ext.Ajax.request({ url: 'resources/routes/roomtype/list.php', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            let store = Ext.create('Ext.data.Store', { data: records });
+            let store = Ext.create('Ext.data.Store', { data: records.data });
             allList.setStore(store);
             store.load();
         }

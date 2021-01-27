@@ -37,6 +37,10 @@ Ext.define('TimeTableApp.view.modules.Menu', {
             },
             items: [
                 {
+                    title: 'Design',
+                    id: 'designTreePanel',
+                },
+                {
                     title: 'Class',
                     id: 'classTreePanel',
                 },

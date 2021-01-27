@@ -1,7 +1,7 @@
 
-Ext.define('TimeTableApp.view.program.program',{
+Ext.define('TimeTableApp.view.program.program', {
     extend: 'Ext.panel.Panel',
-    xtype:'programView',
+    xtype: 'programView',
 
     requires: [
         'TimeTableApp.view.program.programController',
@@ -12,14 +12,13 @@ Ext.define('TimeTableApp.view.program.program',{
     viewModel: {
         type: 'program-program'
     },
-    listeners:{afterrender:'onAfterRender'},
+    listeners: { afterrender: 'onAfterRender' },
     items: [
         {
             xtype: 'container',
             layout: 'hbox',
             margin: 3,
-            items: [ 
-                 //Grid to display all Programs
+            items: [
                 {
                     bodyPadding: 0,
                     width: '100%',
@@ -27,75 +26,48 @@ Ext.define('TimeTableApp.view.program.program',{
                     defaults: {
                         anchor: '100%'
                     },
-                    items: [{
-                        extend: 'Ext.grid.Grid',
-                        xtype: 'grid',
-                        title: 'All Programs',
-                        reference: 'grdallPrograms',
-                        cls:'table',
-                        scrollable:true,
-                        actions: {
-                            delete: {
-                                iconCls: 'x-fa fa-trash-o red',
-                                tooltip: 'Delete'
+                    items: [
+                        {
+                            xtype: 'grid',
+                            title: 'All Programs',
+                            reference: 'grdallPrograms',
+                            cls: 'table',
+                            scrollable: true,
+                            columns: [
+                                { text: 'Program Code', dataIndex: 'programcode', flex: 0.15 },
+                                { text: 'Program Name', dataIndex: 'programname', flex: 0.3 },
+                                { text: 'Duration', dataIndex: 'duration', flex: 0.2 },
+                                { text: 'Department', dataIndex: 'departmentname', flex: 0.3 }
+                            ],
+                            listeners: {
+                                select: 'onItemSelected'
                             },
-                            edit: {
-                                iconCls: 'x-fa fa-pencil-square blue',
-                                tooltip: 'Edit'
-                            }
-                        },
-                        items:[{
-                            docked:'top',
-                            xtype:'toolbar',
-                            items:[{
-                                text: 'Search Box',
-                            }]
-                        }],
-                        columns: [
-                            { text: 'Program Code', dataIndex: 'programCode', flex: 1},
-                            { text: 'Program Name', dataIndex: 'programName', flex: 1 },
-                            { text: 'Duration', dataIndex: 'duration' },
-                            { text: 'Department', dataIndex: 'departmentName',flex: 1 },
-                            {
-                                width: 70,
-                                sortable: false,
-                                menuDisabled: true,
-                                xtype: 'actioncolumn',
-                                items: ['@delete', '@edit']
-                            }
-                        ],
-
-                        listeners: {
-                            select: 'onItemSelected'
-                        },
-                        //Add Pagination toolbar, Paging not working yet, this just sample
-                        bbar: {
-                            xtype: 'pagingtoolbar',
-                            displayInfo: true,
-                            displayMsg: 'Display records {0} - {1} of {2}',
-                            emptyMsg: 'No Record to display'
-                        },
-                        tbar: [
-                            {
-                                xtype: 'textfield',
-                                emptyText: 'Search...',
-                                width: 200,
-                                enableKeyEvents: true,
-                                listeners: {
-                                    keyup: 'onGridSearch', 
+                            bbar: {
+                                xtype: 'pagingtoolbar',
+                                displayInfo: true,
+                                displayMsg: 'Display records {0} - {1} of {2}',
+                                emptyMsg: 'No Record to display'
+                            },
+                            tbar: [
+                                {
+                                    xtype: 'textfield',
+                                    emptyText: 'Search...',
+                                    width: 200,
+                                    enableKeyEvents: true,
+                                    listeners: {
+                                        keyup: 'onGridSearch',
+                                    }
+                                },
+                                {
+                                    xtype: 'button',
+                                    text: 'Refresh',
+                                    iconCls: 'x-fa fa-refresh blue'
                                 }
-                            },
-                            {
-                                xtype: 'button',
-                                text: 'Refresh',
-                                iconCls: 'x-fa fa-refresh blue'
-                            }
-                        ],
-                    }
-                    ],
-
+                            ]
+                        }
+                    ]
                 }
-            ],
+            ]
         }
     ]
 });

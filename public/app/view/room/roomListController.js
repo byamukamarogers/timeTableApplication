@@ -19,18 +19,18 @@ Ext.define('TimeTableApp.view.room.roomListController', {
 
     loadAllGridData: async function () {
         let allList = this.lookupReference('grdallRooms');
-        let response = await Ext.Ajax.request({ url: '/rooms', method: 'get' });
+        let response = await Ext.Ajax.request({ url: 'resources/routes/room/list.php', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            let store = Ext.create('Ext.data.Store', { data: records});
+            let store = Ext.create('Ext.data.Store', { data: records.data });
             allList.setStore(store);
             store.load();
         }
     },
-    
+
     onEditRoom: async function () {
         let selection = this.lookupReference("grdallRooms").getSelection();
-        if (selection.length > 0 ) {
+        if (selection.length > 0) {
             let data = selection[0].data;
             Ext.create('Ext.window.Window', {
                 title: 'ROOM FORM',
@@ -46,7 +46,7 @@ Ext.define('TimeTableApp.view.room.roomListController', {
                     }
                 ]
             }).show();
-        
+
         } else {
             Ext.Msg.alert('Error', 'Please select a room to edit');
         }

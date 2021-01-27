@@ -1,18 +1,51 @@
 var express = require('express');
 var router = express.Router();
+const path = require('path');
 const models = require('../models');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+
+const controllers = require('../controllers');
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
+});
+router.get('/timetable', function (req, res, next) {
+
+  res.sendFile(path.join(process.cwd(), 'views/timetable', 'index.html'));
 });
 
 /* TimeTable Endpoint */
 router.get('/loadTimeTable', async function (req, res, next) {
   let timetable = await models.TimeTable.findAll({ include: [models.Course, models.Ssession, models.Staff, models.Day, models.Room] });
   res.send(timetable);
+});
+router.get('/timeTableByDay', async function (req, res, next) {
+  let result = await models.Day.findAll({ 
+    include: [{
+      model: models.TimeTable,
+      include:[{model: models.Course, include:[models.Staff]}, models.Ssession, models.Staff, {model: models.Room, include:[models.RoomType]}]
+    }],
+    order: [
+      ['dayId', 'ASC']
+  ],
+  });
+  res.send(result);
+});
+
+router.get('/example', async function (req, res, next) {
+  let result = models.Day.findAll({ 
+    include: [{
+      model: models.TimeTable,
+      include:[{model: models.Course, include:[models.Staff]}, models.Ssession, models.Staff, {model: models.Room, include:[models.RoomType]}]
+    }],
+    order: [
+      ['dayId', 'ASC']
+  ],
+  });
+  res.send(result);
 });
 
 /* TimeTable Endpoint */
@@ -58,8 +91,8 @@ router.post('/addLectureClass', async function (req, res, next) {
       }
     }
     if (rawdata.classId) {
-      result = await models.LectureClass.update(data,{where: { classId: data.classId}});
-    }else{
+      result = await models.LectureClass.update(data, { where: { classId: data.classId } });
+    } else {
       result = await models.LectureClass.create(data);
     }
 
@@ -136,8 +169,8 @@ router.post('/addRoom', async function (req, res, next) {
       }
     }
     if (rawdata.roomId) {
-      result = await models.Room.update(data,{ where: { roomId: data.roomId}});
-    }else {
+      result = await models.Room.update(data, { where: { roomId: data.roomId } });
+    } else {
       result = await models.Room.create(data);
     }
 
@@ -162,7 +195,7 @@ router.post('/addRoomType', async function (req, res, next) {
       }
     }
     if (rawdata.roomTypeId) {
-      result = await models.RoomType.update(data,{  where: { roomTypeId: data.roomTypeId }});
+      result = await models.RoomType.update(data, { where: { roomTypeId: data.roomTypeId } });
     } else {
       result = await models.RoomType.create(data);
     }
@@ -199,10 +232,31 @@ router.post('/coursetype', async function (req, res, next) {
   }
 });
 
+router.get('/courseunit', async function (req, res, next) {
+  let course = await models.Course.findAll({ include: [models.Program] });
+  let result;
+  let record = '';
+  if(course){
+    for(let j = 0; j<course.length; j++){      
+      let id = course[j].dataValues.courseId;
+      let courseCode = course[j].dataValues.courseCode;
+      record += '<tr><td class="dark"><div id="' + id + '" class="drag green clone">' + courseCode + '</div></td></tr>\n'; 
+    }
+      
+  console.log(record);
+    /* for (let i = 0; i < course.length; i++) {
+      let id = records[i].courseId;
+      let courseCode = records[i].courseCode;
+      tRows += '<tr><td class="dark"><div id="' + id + '" class="drag green clone">' + courseCode + '</div></td></tr>\n';
+    } */
+  }
+  res.send({res:course, data: record});
+});
 router.get('/courseunits', async function (req, res, next) {
   let course = await models.Course.findAll({ include: [models.Program] });
   res.send(course);
 });
+
 router.post('/addCourseUnit', async function (req, res, next) {
   let rawdata = req.body;
   let data = {};
@@ -376,6 +430,20 @@ router.post('/addInstitution', async function (req, res, next) {
 
 router.get('/faculty', function (req, res, next) {
   res.render('index', { title: 'Express' });
+});
+
+router.get('/designTimeTable', function (req, res, next) {
+
+  let obj = { 1: 'one', 2: 'two', 3: 'three' }
+
+  let result = '<table>';
+  for (let el in obj) {
+    result += "<tr><td>" + el + "</td><td>" + obj[el] + "</td></tr>";
+  }
+  result += '</table>';
+
+  res.send(result);
+
 });
 
 module.exports = router;

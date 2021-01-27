@@ -3,6 +3,20 @@
  * calls Ext.application(). This is the ideal place to handle application launch and
  * initialization details.
  */
+function loadLocale() {
+
+    var lang = localStorage ? (localStorage.getItem('user-lang') || 'en') : 'en',
+        extJsFile = Ext.util.Format.format("resources/locale/{0}.js", lang);
+    //extJsFile = Ext.util.Format.format("ext/packages/ext-locale/build/ext-locale-{0}.js", lang);
+
+    /*Ext.Loader.loadScript({url: file, onError: function(){
+        alert('Error loading locale file. Please contact system administrator.');
+    }});*/
+    Ext.Loader.loadScript({ url: extJsFile });
+}
+
+loadLocale();
+
 Ext.define('TimeTableApp.Application', {
     extend: 'Ext.app.Application',
 
@@ -15,21 +29,11 @@ Ext.define('TimeTableApp.Application', {
         }
     },
 
+    //defaultToken : 'home',
     stores: [
         // TODO: add global / shared stores here
     ],
-
     launch: function () {
-        // TODO - Launch the application
+    
     },
-
-    onAppUpdate: function () {
-        Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
-            function (choice) {
-                if (choice === 'yes') {
-                    window.location.reload();
-                }
-            }
-        );
-    }
-});
+   });

@@ -2,7 +2,7 @@ module.exports = function (sequelize, DataTypes) {
     var Allocation = sequelize.define('Allocation', {
         allocationId: {
             type: DataTypes.INTEGER,
-            field: 'courseid',
+            field: 'allocationid',
             primaryKey: true,
             allowNull: false,
             autoIncrement: true,

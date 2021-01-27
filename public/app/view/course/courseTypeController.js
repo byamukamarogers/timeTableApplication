@@ -6,10 +6,10 @@ Ext.define('TimeTableApp.view.course.courseTypeController', {
     },
     loadCourseTypes: async function () {
         let combo = this.lookupReference('grdCourseTypes');
-        let response = await Ext.Ajax.request({ url: '/loadCourseTypes', method: 'get' });
+        let response = await Ext.Ajax.request({ url: 'resources/routes/coursetype/list.php', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            let store = Ext.create('Ext.data.Store', { data: records });
+            let store = Ext.create('Ext.data.Store', { data: records.data });
             combo.setStore(store);
             store.load();
         }
@@ -21,8 +21,10 @@ Ext.define('TimeTableApp.view.course.courseTypeController', {
         }
     },
     onCourseTypeSave: async function () {
-        let data = this.getViewModel().getData();
-        this.saveData(data);
+        let data = this.cleanupData(this.getViewModel().getData());
+        let record = {};
+        record.data = data;
+        this.saveData(record);
     },
 
     cleanupData: function (rawData) {
@@ -38,9 +40,9 @@ Ext.define('TimeTableApp.view.course.courseTypeController', {
 
     saveData: async function (rawData) {
         let form = this.getView();
-        let data = this.cleanupData(rawData);  
+        let data = rawData;  
         let response = await Ext.Ajax.request({
-            url: '/coursetype',
+            url: 'resources/routes/coursetype/create.php',
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             params: JSON.stringify(data)

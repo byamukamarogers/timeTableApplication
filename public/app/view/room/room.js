@@ -24,10 +24,10 @@ Ext.define('TimeTableApp.view.room.room', {
                     xtype: 'tabpanel',
                     activeTab: 0,
                     items: [
-                        //Room registration form        
                         {
                             title: 'Register New Room',
                             bodyPadding: 5,
+                            xtype: 'form',
                             width: '35%',
                             layout: 'anchor',
                             defaults: {
@@ -37,40 +37,50 @@ Ext.define('TimeTableApp.view.room.room', {
                             items: [
                                 {
                                     fieldLabel: 'Room ID',
-                                    bind: '{roomId}',
-                                    allowBlank: false
-                                }, {
+                                    bind: '{roomid}',
+                                    hidden: true
+                                },
+                                {
+                                    fieldLabel: 'Room ID',
+                                    bind: '{roomid}',
+                                    disabled: true
+                                },
+                                {
                                     fieldLabel: 'Room Name',
-                                    bind: '{roomName}',
+                                    bind: '{roomname}',
                                     allowBlank: false
-                                }, {
+                                },
+                                {
                                     fieldLabel: 'Capacity',
                                     bind: '{capacity}',
                                     allowBlank: false
-                                }, {
+                                },
+                                {
                                     fieldLabel: 'Location',
-                                    bind: '{location}'
-
+                                    bind: '{location}',
+                                    allowBlank: false
                                 },
                                 {
                                     xtype: 'combobox',
                                     reference: 'cboRoomTypeName',
-                                    bind: '{roomTypeId}',
+                                    bind: '{roomtypeid}',
                                     fieldLabel: 'Room Type',
-                                    displayField: 'roomTypeName',
-                                    valueField: 'roomTypeId',
+                                    displayField: 'roomtypename',
+                                    valueField: 'roomtypeid',
                                     forceSelection: true,
-                                    queryMode: 'local'
+                                    queryMode: 'local',
+                                    allowBlank: false
                                 },
                                 {
                                     xtype: 'combobox',
                                     reference: 'cboFacultyName',
-                                    bind: '{facultyId}',
+                                    bind: '{facultyid}',
                                     fieldLabel: 'Faculty Name',
-                                    displayField: 'facultyName',
-                                    valueField: 'facultyId',
+                                    displayField: 'facultyname',
+                                    valueField: 'facultyid',
                                     forceSelection: true,
-                                    queryMode: 'local'
+                                    queryMode: 'local',
+                                    allowBlank: false
                                 }
                             ],
                             buttons: [
@@ -79,8 +89,10 @@ Ext.define('TimeTableApp.view.room.room', {
                                 },
                                 {
                                     text: 'Submit',
+                                    formBind: true,
                                     handler: 'onRoomSubmitClicked'
-                                }],
+                                }
+                            ]
                         },
                         {
                             title: 'Room Types',
@@ -90,16 +102,15 @@ Ext.define('TimeTableApp.view.room.room', {
                                 anchor: '100%'
                             },
                             defaultType: 'textfield',
-                            items: [{
-                                xtype: 'roomTypes',
-                            },
-                            ],
-                        },
-
+                            items: [
+                                {
+                                    xtype: 'roomTypes',
+                                }
+                            ]
+                        }
                     ]
-                },
+                }
             ]
         }
-
-    ],
+    ]
 });

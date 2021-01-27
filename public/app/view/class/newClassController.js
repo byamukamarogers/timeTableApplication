@@ -7,10 +7,10 @@ Ext.define('TimeTableApp.view.class.newClassController', {
     },    
     loadClassList: async function () {
         let allList = this.lookupReference('grdLectureClasses');
-        let response = await Ext.Ajax.request({ url: '/loadLectureClasses', method: 'get' });
+        let response = await Ext.Ajax.request({ url: 'resources/routes/class/list.php', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            let store = Ext.create('Ext.data.Store', { data: records });
+            let store = Ext.create('Ext.data.Store', { data: records.data });
             allList.setStore(store);
             store.load();
         }

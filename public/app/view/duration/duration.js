@@ -15,84 +15,52 @@ Ext.define('TimeTableApp.view.duration.duration', {
     listeners: { afterrender: 'onAfterRender' },
     items: [
         {
-            xtype: 'container',
+            bodyPadding: 0,
+            width: '100%',
             layout: 'hbox',
             margin: 3,
             items: [
-                //Grid to display all durations
                 {
-                    bodyPadding: 0,
-                    width: '100%',
-                    layout: 'anchor',
-                    defaults: {
-                        anchor: '100%'
-                    },
-                    defaultType: 'textfield',
-                    items: [{
-                        extend: 'Ext.grid.Panel',
-                        xtype: 'grid',
-                        title: 'All Time Table Sessions',
-                        reference: 'grdallSessions',
-                        actions: {
-                            delete: {
-                                iconCls: 'x-fa fa-trash-o red',
-                                tooltip: 'Delete'
-                            },
-                            edit: {
-                                iconCls: 'x-fa fa-pencil-square blue',
-                                tooltip: 'Edit'
-                            }
-                        },
-                        items:[{
-                            docked:'top',
-                            xtype:'toolbar',
-                            items:[{
-                                text: 'Search Box',
-                            }]
-                        }],
-                        columns: [
-                            { text: 'Session Id', dataIndex: 'ssessionId', flex: 1 },
-                            { text: 'Length (Hours)', dataIndex: 'durationLength', flex: 1 },
-                            { text: 'Start Time', dataIndex: 'from', flex: 1 },
-                            { text: 'End Time', dataIndex: 'to',flex: 1  },
-                            {
-                                width: 70,
-                                sortable: false,
-                                menuDisabled: true,
-                                xtype: 'actioncolumn',
-                                items: ['@delete', '@edit']
-                            }
-                        ],
-                        //Add Pagination toolbar, Paging not working yet, this just sample
-                        bbar: {
-                            xtype: 'pagingtoolbar',
-                            displayInfo: true,
-                            displayMsg: 'Display records {0} - {1} of {2}',
-                            emptyMsg: 'No Record to display'
-                        },
-                        tbar: [
-                            {
-                                xtype: 'textfield',
-                                emptyText: 'Search...',
-                                width: 200
-                            },
-                            {
-                                xtype: 'button',
-                                text: 'Search',
-                                iconCls: 'x-fa fa-search blue'
-                            },
-                            {
-                                xtype: 'button',
-                                text: 'Refresh',
-                                iconCls: 'x-fa fa-refresh blue'
-                            }
-                        ],
-                    }
+                    xtype: 'grid',
+                    width: '60%',
+                    title: 'All Sessions',
+                    reference: 'grdallSessions',
+                    columns: [
+                        { text: 'Session Id', dataIndex: 'ssessionid', flex: 1 },
+                        { text: 'Session Name', dataIndex: 'ssessionName', flex: 1 }
                     ],
-
+                    bbar: {
+                        xtype: 'pagingtoolbar',
+                        displayInfo: true,
+                        displayMsg: 'Display records {0} - {1} of {2}',
+                        emptyMsg: 'No Record to display'
+                    },
+                    tbar: [
+                        {
+                            xtype: 'textfield',
+                            emptyText: 'Search...',
+                            width: 200
+                        },
+                        {
+                            xtype: 'button',
+                            text: 'Search',
+                            iconCls: 'x-fa fa-search blue'
+                        },
+                        {
+                            xtype: 'button',
+                            text: 'Refresh',
+                            handler: 'onGridRefresh',
+                            iconCls: 'x-fa fa-refresh blue'
+                        }
+                    ]
                 },
+                {
+                    xtype: 'durationForm',
+                    margin: '0 0 0 3',
+                    width: '40%',
+                    anchor: '100%'
+                }
             ]
-        },
-
-    ],
+        }
+    ]
 });

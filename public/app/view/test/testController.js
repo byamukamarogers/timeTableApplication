@@ -1,39 +1,22 @@
 Ext.define('TimeTableApp.view.test.testController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.test-test',
-    init:function(){
-        var tabs = Ext.create('Ext.tab.Panel', {
-            items: [
-                {
-                    id   : 'my-tab',
-                    title: 'Tab 1',
-                    html : 'A simple tab'
-                },
-                {
-                    title: 'Tab 2',
-                    html : 'Another one'
-                }
-            ],
-        });
+    loadData: async function(){
+        let grid = this.lookupReference("samplegrd");
+        let data = [
+            
+                { name: 'Aubrey',  age: 17 },
+                { name: 'Joshua',  age: 13 },
+                { name: 'Cale',    age: 10 },
+                { name: 'Nikol',   age: 5 },
+                { name: 'Solomon', age: 0 }
+            
+        ]
         
-        var tab = Ext.getCmp('my-tab');
-        
-        Ext.create('Ext.button.Button', {
-            renderTo: Ext.getBody(),
-            text    : 'Select the first tab',
-            scope   : this,
-            handler : function() {
-                tabs.setActiveTab(tab);
-            }
-        });
-        
-        Ext.create('Ext.button.Button', {
-            text    : 'Select the second tab',
-            scope   : this,
-            handler : function() {
-                tabs.setActiveTab(1);
-            },
-        });
+        let store = Ext.create('Ext.data.Store', { data: data });
+        grid.setStore(store);
+        store.load();
+
     }
 
 

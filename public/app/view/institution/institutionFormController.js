@@ -6,8 +6,11 @@ Ext.define('TimeTableApp.view.institution.institutionFormController', {
     },
 
     onInstitutionSubmitClicked: async function () {
-        let data = this.getViewModel().getData();
-        this.saveData(data);
+        let data1 = this.getViewModel().getData();
+        let record = {};
+        let data = this.cleanupData(data1);
+        record.data = data;
+        this.saveData(record);
     },
 
     cleanupData: function (rawData) {
@@ -23,9 +26,9 @@ Ext.define('TimeTableApp.view.institution.institutionFormController', {
 
     saveData: async function (rawData) {
         let form = this.getView();
-        let data = this.cleanupData(rawData);  
+        let data = rawData;  
         let response = await Ext.Ajax.request({
-            url: '/addInstitution',
+            url: 'resources/routes/institution/create.php',
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             params: JSON.stringify(data)

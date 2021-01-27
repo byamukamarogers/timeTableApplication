@@ -19,8 +19,6 @@ Ext.define('TimeTableApp.view.faculty.faculty', {
             layout: 'hbox',
             margin: 3,
             items: [
-                
-                //Grid to display all Programs
                 {
                     bodyPadding: 0,
                     width: '100%',
@@ -28,23 +26,20 @@ Ext.define('TimeTableApp.view.faculty.faculty', {
                     defaults: {
                         anchor: '100%'
                     },
-                    items: [{
-                        extend: 'TimeTableApp.view.util.base.Grid',
-                        xtype: 'baseGrid',
-                        title: 'Faculty List',
-                        reference: 'grdallFaculties',
-                        columns: [
-                            { text: 'Faculty id', dataIndex: 'facultyId' },
-                            { text: 'Faculty Name', dataIndex: 'facultyName', flex: 1 },
-                            { text: 'Institution', dataIndex: 'InstitutionName', flex: 1 },
-
-                        ],
-
-                    }
-                    ],
-
+                    items: [
+                        {
+                            xtype: 'grid',
+                            title: 'Faculty List',
+                            reference: 'grdallFaculties',
+                            columns: [
+                                { text: 'Faculty id', dataIndex: 'facultyid', flex: 0.15 },
+                                { text: 'Faculty Name', dataIndex: 'facultyname', flex: 0.35 },
+                                { text: 'Institution', dataIndex: 'institutionname', flex: 0.35 }
+                            ]
+                        }
+                    ]
                 }
-            ],
+            ]
         }
     ]
 });

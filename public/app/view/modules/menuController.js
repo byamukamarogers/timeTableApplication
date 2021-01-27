@@ -28,8 +28,31 @@ Ext.define('TimeTableApp.view.modules.MenuController', {
         this.loadCourseMenuComponent();
         this.loadRoomMenuComponent();
         this.loadClassMenuComponent();
+        this.loadDesignComponent();
     },
 
+    loadDesignComponent: async function () {
+        Ext.create('Ext.tree.Panel', {
+            id: 'designTree',
+            header: false,
+            textAlign: 'left',
+            store: {
+                root: {
+                    expanded: false,
+                    children: [
+                        { text: "Structure", leaf: true,  xtype: 'testView'},
+                        { text: "Test", leaf: true, xtype: 'ttStructure' },
+                    ]
+                }
+            },
+            rootVisible: false,
+
+            listeners: { itemclick: 'onMenuItemClicked', }
+        });
+        var designPanel = Ext.getCmp('designTreePanel');
+        var designTree = Ext.getCmp('designTree');
+        designPanel.add(designTree);
+    },
     loadStaffMenuComponent: async function () {
         Ext.create('Ext.tree.Panel', {
             //title: 'A list of all the wards registerd in the appilication database',

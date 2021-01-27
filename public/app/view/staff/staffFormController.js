@@ -7,17 +7,20 @@ Ext.define('TimeTableApp.view.staff.staffFormController', {
 
     loadDepartmentNames: async function () {
         let combo = this.lookupReference('cboDepartmentName');
-        let response = await Ext.Ajax.request({ url: '/departments', method: 'get' });
+        let response = await Ext.Ajax.request({ url: 'resources/routes/department/list.php', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            let store = Ext.create('Ext.data.Store', { data: records });
+            let store = Ext.create('Ext.data.Store', { data: records.data });
             combo.setStore(store);
             store.load();
         }
     },
     onStaffSubmitClicked: async function () {
-        let data = this.getViewModel().getData();
-        this.saveData(data);
+        let data1 = this.getViewModel().getData();
+        let data = this.cleanupData(data1);
+        let record = {}
+        record.data = data;
+        this.saveData(record);
     },
 
     cleanupData: function (rawData) {
@@ -33,10 +36,10 @@ Ext.define('TimeTableApp.view.staff.staffFormController', {
 
     saveData: async function (rawData) {
         let form = this.getView();
-        let data = this.cleanupData(rawData);  
+        let data = rawData;  
         let response = await Ext.Ajax.request({
-            url: '/addStaff',
-            method: 'post',
+            url: 'resources/routes/staff/create.php',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             params: JSON.stringify(data)
         });
@@ -44,7 +47,7 @@ Ext.define('TimeTableApp.view.staff.staffFormController', {
         if (response.responseText) {
             let result = JSON.parse(response.responseText);
             if (result.status === 'OK') {
-                Ext.Msg.alert('FOS TimeTable Application', 'Data has been successfully saved');
+                Ext.Msg.alert('TimeTable App', 'Data has been successfully');
                 let parent = form.up('window');
                 if (parent) {
                     parent.destroy();

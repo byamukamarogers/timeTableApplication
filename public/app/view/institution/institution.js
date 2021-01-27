@@ -18,7 +18,6 @@ Ext.define('TimeTableApp.view.institution.institution', {
             layout: 'hbox',
             margin: 3,
             items: [
-                //Grid to display all Universities
                 {
                     bodyPadding: 0,
                     width: '100%',
@@ -27,42 +26,16 @@ Ext.define('TimeTableApp.view.institution.institution', {
                         anchor: '100%'
                     },
                     items: [{
-                        extend: 'Ext.grid.Panel',
                         xtype: 'grid',
                         title: 'All Institutions(Universities)',
                         reference: 'grdallUniversities',
-                        actions: {
-                            delete: {
-                                iconCls: 'x-fa fa-trash-o red',
-                                tooltip: 'Delete'
-                            },
-                            edit: {
-                                iconCls: 'x-fa fa-pencil-square blue',
-                                tooltip: 'Edit'
-                            }
-                        },
-                        items: [{
-                            docked: 'top',
-                            xtype: 'toolbar',
-                            items: [{
-                                text: 'Search Box',
-                            }]
-                        }],
                         columns: [
-                            { text: 'University id', dataIndex: 'institutionId', flex: 0 },
-                            { text: 'Name', dataIndex: 'InstitutionName', flex: 1 },
-                            { text: 'Telephone', dataIndex: 'phoneContact', flex: 1 },
-                            { text: 'Email', dataIndex: 'email', flex: 1 },
-                            { text: 'Address', dataIndex: 'address', flex: 1 },
-                            {
-                                width: 70,
-                                sortable: false,
-                                menuDisabled: true,
-                                xtype: 'actioncolumn',
-                                items: ['@delete', '@edit']
-                            }
+                            { text: 'INST ID', dataIndex: 'institutionid', flex: 0.1 },
+                            { text: 'Name', dataIndex: 'institutionname', flex: 0.25 },
+                            { text: 'Telephone', dataIndex: 'phonecontact', flex: 0.15 },
+                            { text: 'Email', dataIndex: 'email', flex: 0.2 },
+                            { text: 'Address', dataIndex: 'address', flex: 0.3 }
                         ],
-                        //Add Pagination toolbar, Paging not working yet, this just sample
                         bbar: {
                             xtype: 'pagingtoolbar',
                             displayInfo: true,
@@ -85,12 +58,11 @@ Ext.define('TimeTableApp.view.institution.institution', {
                                 text: 'Refresh',
                                 iconCls: 'x-fa fa-refresh blue'
                             }
-                        ],
+                        ]
                     }
-                    ],
-
+                    ]
                 }
-            ],
+            ]
         }
     ]
 });

@@ -18,7 +18,6 @@ Ext.define('TimeTableApp.view.staff.staff', {
             layout: 'hbox',
             margin: 3,
             items: [
-                //Grid to display all Lecturers
                 {
                     bodyPadding: 0,
                     width: '100%',
@@ -26,74 +25,58 @@ Ext.define('TimeTableApp.view.staff.staff', {
                     defaults: {
                         anchor: '100%'
                     },
-                    items: [{
-                        extend: 'Ext.grid.Panel',
-                        xtype: 'grid',
-                        title: 'All Lecturers',
-                        reference: 'grdallStaff',
-                        actions: {
-                            delete: {
-                                iconCls: 'x-fa fa-trash-o red',
-                                tooltip: 'Delete'
+                    items: [
+                        {
+                            xtype: 'grid',
+                            title: 'All Lecturers',
+                            reference: 'grdallStaff',
+                            columns: [
+                                { text: 'Staff Id', dataIndex: 'staffid', flex: 0.1 },
+                                { text: 'Name', dataIndex: 'name', flex: 0.25 },
+                                { text: 'Initial', dataIndex: 'initial', flex:0.1 },
+                                { text: 'Email', dataIndex: 'email', flex:0.25 },
+                                { text: 'Mobile', dataIndex: 'phone1', flex:0.15 },
+                                { text: 'Department', dataIndex: 'departmentname', flex: 0.2 }
+                            ],
+                            bbar: {
+                                xtype: 'pagingtoolbar',
+                                displayInfo: true,
+                                displayMsg: 'Display records {0} - {1} of {2}',
+                                emptyMsg: 'No Record to display'
                             },
-                            edit: {
-                                iconCls: 'x-fa fa-pencil-square blue',
-                                tooltip: 'Edit'
-                            }
-                        },
-                        items: [{
-                            docked: 'top',
-                            xtype: 'toolbar',
-                            items: [{
-                                text: 'Search Box',
-                            }]
-                        }],
-                        columns: [
-                            { text: 'Staff Id', dataIndex: 'staffId' },
-                            { text: 'Name', dataIndex: 'name', flex: 1 },
-                            { text: 'Gender', dataIndex: 'gender' },
-                            { text: 'Address', dataIndex: 'address' },
-                            { text: 'Email', dataIndex: 'email' },
-                            { text: 'Mobile', dataIndex: 'mobilePhone' },
-                            { text: 'Telephone', dataIndex: 'telePhone' },
-                            { text: 'Department', dataIndex: 'departmentName', flex: 1 },
-                            {
-                                width: 70,
-                                sortable: false,
-                                menuDisabled: true,
-                                xtype: 'actioncolumn',
-                                items: ['@delete', '@edit']
-                            }
-                        ],
-                        //Add Pagination toolbar, Paging not working yet, this just sample
-                        bbar: {
-                            xtype: 'pagingtoolbar',
-                            displayInfo: true,
-                            displayMsg: 'Display records {0} - {1} of {2}',
-                            emptyMsg: 'No Record to display'
-                        },
-                        tbar: [
-                            {
-                                xtype: 'textfield',
-                                emptyText: 'Search...',
-                                width: 200
-                            },
-                            {
-                                xtype: 'button',
-                                text: 'Search',
-                                iconCls: 'x-fa fa-search blue'
-                            },
-                            {
-                                xtype: 'button',
-                                text: 'Refresh',
-                                iconCls: 'x-fa fa-refresh blue'
-                            }
-                        ],
-                    }
-                    ],
+                            plugins: [
+                                {
+                                    ptype: 'rowexpander',
+                                    rowBodyTpl: [
+                                        '<b>Gender :</b> {gender} ',
+                                        '<b>Telephone :</b> {phone2}',
+                                        '<b>Address :</b> {address}',
+                                        '<b>Department :</b> {departmentname}'
+                                    ]
+                                }
+                            ],
+                            tbar: [
+                                {
+                                    xtype: 'textfield',
+                                    emptyText: 'Search...',
+                                    width: 200
+                                },
+                                {
+                                    xtype: 'button',
+                                    text: 'Search',
+                                    iconCls: 'x-fa fa-search blue'
+                                },
+                                {
+                                    xtype: 'button',
+                                    text: 'Refresh',
+                                    iconCls: 'x-fa fa-refresh blue'
+                                }
+                            ]
+                        }
+                    ]
 
                 }
-            ],
+            ]
         }
     ]
 });

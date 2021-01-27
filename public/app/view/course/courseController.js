@@ -6,17 +6,10 @@ Ext.define('TimeTableApp.view.course.courseController', {
     },
     loadCourseGrdData: async function () {
         let allList = this.lookupReference('grdallCourses');
-        let response = await Ext.Ajax.request({ url: '/courseunits', method: 'get' });
+        let response = await Ext.Ajax.request({ url: 'resources/routes/course/list.php', method: 'get' });
         if (response.responseText) {
             let records = JSON.parse(response.responseText);
-            var cleanRecords = [];
-            for(var i = 0; i < records.length; i++){
-                var singleRecord = records[i];
-                singleRecord["programName"] = singleRecord.Program.programName;
-                delete singleRecord.Program;
-                cleanRecords.push(singleRecord);
-            }
-            let store = Ext.create('Ext.data.Store', { data: cleanRecords });
+            let store = Ext.create('Ext.data.Store', { data: records.data });
             allList.setStore(store);
             store.load();
         }

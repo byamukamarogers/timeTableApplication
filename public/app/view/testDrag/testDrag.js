@@ -59,12 +59,12 @@ Ext.define('TimeTableApp.view.testDrag.testDrag', {
                 '<table><tbody>',
                 '<tr><td class="patient-label">Name</td><td class="patient-name">{name}</td></tr>',
                 '<tr><td class="patient-label">Address</td><td class="patient-name">{address}</td></tr>',
-                '<tr><td class="patient-label">Telephone</td><td class="patient-name">{telephone}</td></tr>',
+                //'<tr><td class="patient-label">Telephone</td><td class="patient-name">{telephone}</td></tr>',
                 '</tbody></table>',
                 '</div>',
                 '</tpl>'
             ],
-            listeners: {
+            /* listeners: {
                 afterrender: function (v) {
                     console.log("here just");
                     this.dragZone = new Ext.dd.DragZone(v.getEl(), {
@@ -89,14 +89,15 @@ Ext.define('TimeTableApp.view.testDrag.testDrag', {
                     });
 
                 }
-            }
+            } */
 
         }]
     },/*  {
         xtype: 'spacer',
         maxHeight: 20,
         maxWidth: 20
-    }, */ {
+    }, */ 
+    /* {
         xtype: 'grid',
         flex: 0.6,
         title: 'Hospitals',
@@ -173,5 +174,6 @@ Ext.define('TimeTableApp.view.testDrag.testDrag', {
             delegate: ['.remove-icon'],
             tap: 'onRemoveTapped'
         }
-    }]
+    } */
+]
 });

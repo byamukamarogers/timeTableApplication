@@ -1,7 +1,7 @@
 
-Ext.define('TimeTableApp.view.roomTypes.RoomType',{
+Ext.define('TimeTableApp.view.roomTypes.RoomType', {
     extend: 'Ext.panel.Panel',
-    xtype:'roomTypes',
+    xtype: 'roomTypes',
 
     requires: [
         'TimeTableApp.view.roomTypes.RoomTypeController',
@@ -12,45 +12,62 @@ Ext.define('TimeTableApp.view.roomTypes.RoomType',{
     viewModel: {
         type: 'roomtypes-roomtype'
     },
-    listeners:{afterrender:'onAfterRoomTypeLoad'},
+    listeners: { afterrender: 'onAfterRoomTypeLoad' },
     items: [
         {
             xtype: 'container',
             layout: 'hbox',
             margin: '3 0 0 0',
-            items: [      
+            items: [
                 {
                     title: 'Register New Room Type',
                     bodyPadding: 5,
+                    xtype:'form',
                     width: '40%',
                     layout: 'anchor',
                     defaults: {
                         anchor: '100%'
                     },
                     defaultType: 'textfield',
-                    items: [{
-                        fieldLabel: 'Type ID',
-                        bind: '{roomTypeId}',
-                        allowBlank: false
-                    }, {
-                        fieldLabel: 'Type Name',
-                        bind: '{roomTypeName}',
-                        allowBlank: false
-                    }, {
-                        fieldLabel: 'Description',
-                        xtype:'textareafield',
-                        bind: '{roomTypeDescription}',
-                        allowBlank: false
-                    },
+                    items: [
+                        {
+                            fieldLabel: 'Type ID',
+                            bind: '{roomtypeid}',
+                            hidden:true
+                        },
+                        {
+                            fieldLabel: 'Type ID',
+                            bind: '{roomtypeid}',
+                            disabled: true
+                        },
+                         {
+                            fieldLabel: 'Type Name',
+                            bind: '{roomtypename}',
+                            allowBlank: false
+                        },
+                         {
+                            fieldLabel: 'Type Code',
+                            bind: '{roomtypecode}',
+                            allowBlank: false
+                        },
+                         {
+                            fieldLabel: 'Description',
+                            xtype: 'textareafield',
+                            bind: '{roomtypedescription}',
+                            allowBlank: false
+                        }
                     ],
-                    buttons: [{
-                        text: 'Reset'
-                    }, {
-                        text: 'Submit',
-                        handler: 'onRoomTypeSubmitClicked'
-                    }],
+                    buttons: [
+                        {
+                            text: 'Reset'
+                        },
+                        {
+                            text: 'Submit',
+                            formBind: true,
+                            handler: 'onRoomTypeSubmitClicked'
+                        }
+                    ],
                 },
-                //Grid to display all Available rooms
                 {
                     margin: '0 0 0 10',
                     bodyPadding: 0,
@@ -60,16 +77,17 @@ Ext.define('TimeTableApp.view.roomTypes.RoomType',{
                         anchor: '100%'
                     },
                     defaultType: 'textfield',
-                    items: [{
-                        extend: 'Ext.grid.Panel',
-                        xtype: 'grid',
-                        title: 'All Room Types',
-                        reference: 'grdallRoomTypes',
-                        columns: [
-                            { text: 'Type Name', dataIndex: 'roomTypeName', flex: 1 },
-                            { text: 'Description', dataIndex: 'roomTypeDescription', flex: 1 },
-                        ],
-                    }
+                    items: [
+                        {
+                            xtype: 'grid',
+                            title: 'All Room Types',
+                            reference: 'grdallRoomTypes',
+                            columns: [
+                                { text: 'Type Name', dataIndex: 'roomtypename', flex: 1 },
+                                { text: 'Type Name', dataIndex: 'roomtypecode', flex: 1 },
+                                { text: 'Description', dataIndex: 'roomtypedescription', flex: 1 },
+                            ],
+                        }
                     ],
 
                 },

@@ -28,23 +28,23 @@ Ext.define('TimeTableApp.view.course.courseType', {
             columns: [
                 {
                     text: 'Course Type Id',
-                    dataIndex: 'courseId',
+                    dataIndex: 'courseid',
                     hidden: true
                 },
                 {
                     text: 'Course Type Name',
-                    dataIndex: 'courseTypeName',
+                    dataIndex: 'coursetypename',
                     flex: 0.4
                 },
                 {
                     text: 'Course Type Code',
-                    dataIndex: 'courseTypeCode',
+                    dataIndex: 'coursetypecode',
                     flex: 0.2,
                     hidden: true
                 },
                 {
                     text: 'Description',
-                    dataIndex: 'courseTypeDescription',
+                    dataIndex: 'coursetypedescription',
                     flex: 0.3
                 }
             ],
@@ -86,24 +86,24 @@ Ext.define('TimeTableApp.view.course.courseType', {
             items: [
                 {
                     fieldLabel: 'Course Type ID',
-                    bind: '{courseTypeId}',
+                    bind: '{coursetypeid}',
                     allowBlank: true,
                     readOnly: true
                 },
                 {
                     fieldLabel: 'Course Type Name',
-                    bind: '{courseTypeName}',
+                    bind: '{coursetypename}',
                     allowBlank: false
                 },
                 {
                     fieldLabel: 'Course Type Code',
-                    bind: '{courseTypeCode}',
+                    bind: '{coursetypecode}',
                     allowBlank: true
                 },
                 {
                     fieldLabel: 'Description',
                     xtype: 'textarea',
-                    bind: '{courseTypeDescription}',
+                    bind: '{coursetypedescription}',
                     allowBlank: true
                 }
             ],

@@ -1,5 +1,5 @@
 
-Ext.define('TimeTableApp.view.faculty.facultyForm',{
+Ext.define('TimeTableApp.view.faculty.facultyForm', {
     extend: 'Ext.panel.Panel',
     xtype: 'facultyForm',
 
@@ -13,7 +13,6 @@ Ext.define('TimeTableApp.view.faculty.facultyForm',{
         type: 'faculty-facultyform'
     },
     listeners: { afterrender: 'onAfterRender' },
-
     items: [
         {
             xtype: 'container',
@@ -23,43 +22,54 @@ Ext.define('TimeTableApp.view.faculty.facultyForm',{
                 {
                     title: 'Add New Faculty',
                     bodyPadding: 5,
+                    xtype: 'form',
                     width: '50%',
                     layout: 'anchor',
                     defaults: {
                         anchor: '100%'
                     },
                     defaultType: 'textfield',
-                    items: [{
-                        fieldLabel: 'Faculty Id',
-                        bind: '{facultyId}',
-                        allowBlank: false
-                    }, {
-                        fieldLabel: 'Faculty Name',
-                        bind: '{facultyName}',
-                        allowBlank: false
-                    },
-                    {
-                        xtype: 'combobox',
-                        reference: 'cboInstitutionName',
-                        bind: '{institutionId}',
-                        fieldLabel: 'Institution Name',
-                        displayField: 'InstitutionName',
-                        valueField: 'institutionId',
-                        forceSelection: true,
-                        queryMode: 'local'
-                    }
+                    items: [
+                        {
+                            fieldLabel: 'Faculty Id',
+                            bind: '{facultyid}',
+                            hidden: true
+                        },
+                        {
+                            fieldLabel: 'Faculty Id',
+                            bind: '{facultyid}',
+                            disabled: true
+                        },
+                        {
+                            fieldLabel: 'Faculty Name',
+                            bind: '{facultyname}',
+                            allowBlank: false
+                        },
+                        {
+                            xtype: 'combobox',
+                            reference: 'cboInstitutionName',
+                            bind: '{institutionid}',
+                            fieldLabel: 'Institution Name',
+                            displayField: 'institutionname',
+                            valueField: 'institutionid',
+                            forceSelection: true,
+                            queryMode: 'local',
+                            allowBlank: false
+                        }
 
                     ],
-                    buttons: [{
-                        text: 'Reset'
-                    }, {
-                        text: 'Submit',
-                        handler: 'onFacultySubmitClicked'
-                    }],
-                },
-                //Grid to display all Programs
-                
-            ],
+                    buttons: [
+                        {
+                            text: 'Reset'
+                        },
+                        {
+                            text: 'Submit',
+                            formBind: true,
+                            handler: 'onFacultySubmitClicked'
+                        }
+                    ]
+                }
+            ]
         }
     ]
 });
